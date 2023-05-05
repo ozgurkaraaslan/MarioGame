@@ -29,9 +29,26 @@ void Game::update(void){
          window->clear();
 
          window->draw(bgSprite);
+         window->draw(floorSprite);
+         window->draw(pipeLeftSprite);
+         window->draw(pipeRightSprite);
 
          window->display();
 
          sf::sleep(sf::milliseconds(1000/speed));
      }
+}
+void Game::drawBackground() {
+    floorTexture.loadFromFile("../assets/floor.png");
+    floorSprite.setTexture(floorTexture);
+    floorSprite.setPosition(Vector2f(0, (window->getSize().y)*0.87));
+    
+    pipeLeftTexture.loadFromFile("../assets/pipe.png");
+    pipeLeftSprite.setTexture(pipeLeftTexture);
+    pipeLeftSprite.rotate(180);
+    pipeLeftSprite.setPosition(Vector2f(pipeLeftTexture.getSize().x, ((window->getSize().y) * 0.78) + pipeLeftTexture.getSize().y));
+
+    pipeRightTexture.loadFromFile("../assets/pipe.png");
+    pipeRightSprite.setTexture(pipeRightTexture);
+    pipeRightSprite.setPosition(Vector2f((window->getSize().x - pipeRightTexture.getSize().x), (window->getSize().y) * 0.78));
 }

@@ -45,7 +45,9 @@ int main()
 int main()
 {
     Game game(SPEED);
-    game.update();
 
+    
+    game.drawBackground();
+    game.update();
     return 0;
 }
