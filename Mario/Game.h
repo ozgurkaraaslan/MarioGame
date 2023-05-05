@@ -8,4 +8,5 @@ class Game {
 public:
 	Game(int);
 	void update(void);
+	void drawBackground(sf::RenderWindow& window);
 };
