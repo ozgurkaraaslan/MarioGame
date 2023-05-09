@@ -23,7 +23,7 @@ Game::Game(int speed) {
         for (m = 0; m < brick_nums[j]; m+=2) {
 
             bricks[k+m].setPosition(Vector2f(float(column), float(row)));
-            bricks[k + m + 1].setPosition(Vector2f(float(window->getSize().x - column), float(row)));
+            bricks[k + m + 1].setPosition(Vector2f(float(window->getSize().x - column - bricks[k + m].texture.getSize().x), float(row)));
             column += bricks[k + m].texture.getSize().x;
         }
         k += m;
