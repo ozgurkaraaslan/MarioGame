@@ -2,7 +2,8 @@
 #include"Common.h"
 #include "Background.h"
 
-class Brick : public Background{
+class Floor : public Background {
 public:
-	Brick();
+	Floor();
 };
+

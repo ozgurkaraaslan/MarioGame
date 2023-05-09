@@ -11,7 +11,6 @@ Game::Game(int speed) {
     */
     this->speed = speed;
     
-    
 }
 
 void Game::update(void){
@@ -30,45 +29,35 @@ void Game::update(void){
 
          window->clear();
          
-
-         //window->draw(bgSprite);
-         window->draw(floorSprite);
-         window->draw(pipeLeftSprite);
-         window->draw(pipeRightSprite);
-         window->draw(pipeSLeftSprite); 
-         window->draw(pipeSRightSprite);
+         floor->draw(window);
+         pipeSs[0].draw(window);
+         pipeSs[1].draw(window);
+         pipes[0].draw(window);
+         pipes[1].draw(window);
 
          for (int i = 0; i < NUM_BRICKS; i++) {
              bricks[i].draw(window);
          }
 
          window->display();
-
          sf::sleep(sf::milliseconds(1000/speed));
      }
 }
 void Game::drawBackground() {
-    floorTexture.loadFromFile("../assets/floor.png");
-    floorSprite.setTexture(floorTexture);
-    floorSprite.setPosition(Vector2f(0, (window->getSize().y)*0.87));
+
+
+    floor = new Floor;
+    floor->setPosition(Vector2f(0, (window->getSize().y) * 0.87));
     
-    pipeLeftTexture.loadFromFile("../assets/pipe.png");
-    pipeLeftSprite.setTexture(pipeLeftTexture);
-    pipeLeftSprite.setScale(-1.f, 1.f);
-    pipeLeftSprite.setPosition(Vector2f(pipeLeftTexture.getSize().x, ((window->getSize().y) * 0.8)));
+    pipeSs = new PipeS[2];
+    pipeSs[0].setPosition(Vector2f(0, ((window->getSize().y) * 0.1)));
+    pipeSs[1].setScale(-1.f, 1.f);
+    pipeSs[1].setPosition(Vector2f((window->getSize().x), (window->getSize().y) * 0.1));
 
-    pipeRightTexture.loadFromFile("../assets/pipe.png");
-    pipeRightSprite.setTexture(pipeRightTexture);
-    pipeRightSprite.setPosition(Vector2f((window->getSize().x - pipeRightTexture.getSize().x), (window->getSize().y) * 0.8));
-
-    pipeSLeftTexture.loadFromFile("../assets/pipeS.png");
-    pipeSLeftSprite.setTexture(pipeSLeftTexture);
-    pipeSLeftSprite.setPosition(Vector2f(0, ((window->getSize().y) * 0.1)));
-
-    pipeSRightTexture.loadFromFile("../assets/pipeS.png");
-    pipeSRightSprite.setTexture(pipeSRightTexture);
-    pipeSRightSprite.setScale(-1.f, 1.f);
-    pipeSRightSprite.setPosition(Vector2f((window->getSize().x), (window->getSize().y) * 0.1));
+    pipes = new Pipe[2];
+    pipes[0].setScale(-1.f, 1.f);
+    pipes[0].setPosition(Vector2f(pipes[0].texture.getSize().x, ((window->getSize().y) * 0.8)));
+    pipes[1].setPosition(Vector2f((window->getSize().x - pipes[1].texture.getSize().x), (window->getSize().y) * 0.8));
 
     float row = 0;
     float column = 0;
@@ -83,7 +72,6 @@ void Game::drawBackground() {
             column = 260;
 
         for (m = 0; m < brick_nums[j]; m += 2) {
-
 
             bricks[k + m].setPosition(Vector2f(float(column), float(row)));
             bricks[k + m + 1].setPosition(Vector2f(float(window->getSize().x - column - bricks[k + m].texture.getSize().x), float(row)));

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\backgroundObjects">
+      <UniqueIdentifier>{41e59a00-9d07-4ecb-8bc5-3803ded0dfa4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -21,8 +24,20 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClCompile>
     <ClCompile Include="Brick.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipe.cpp">
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PipeS.cpp">
+      <Filter>Source Files\backgroundObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -32,8 +47,20 @@
     <ClInclude Include="Common.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClInclude>
     <ClInclude Include="Brick.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Source Files\backgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PipeS.h">
+      <Filter>Source Files\backgroundObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
