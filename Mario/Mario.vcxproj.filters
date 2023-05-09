@@ -24,20 +24,29 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Background.cpp">
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="backgroundObjects\Background.cpp">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Brick.cpp">
+    <ClCompile Include="backgroundObjects\Brick.cpp">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp">
+    <ClCompile Include="backgroundObjects\Floor.cpp">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Pipe.cpp">
+    <ClCompile Include="backgroundObjects\PipeS.cpp">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClCompile>
-    <ClCompile Include="PipeS.cpp">
+    <ClCompile Include="backgroundObjects\Pipe.cpp">
       <Filter>Source Files\backgroundObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Mario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Turtle.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,20 +56,29 @@
     <ClInclude Include="Common.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Background.h">
+    <ClInclude Include="Object.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="backgroundObjects\Background.h">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Brick.h">
+    <ClInclude Include="backgroundObjects\Brick.h">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Floor.h">
+    <ClInclude Include="backgroundObjects\Floor.h">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Pipe.h">
+    <ClInclude Include="backgroundObjects\Pipe.h">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClInclude>
-    <ClInclude Include="PipeS.h">
+    <ClInclude Include="backgroundObjects\PipeS.h">
       <Filter>Source Files\backgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Mario.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Turtle.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

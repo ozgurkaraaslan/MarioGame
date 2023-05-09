@@ -3,17 +3,15 @@
 
 Game::Game(int speed) {
 
-	window = new RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "MarioGame");
-	/*
-    bgTexture.loadFromFile("../assets/bg.png");
-	bgTexture.setRepeated(true);
-	bgSprite.setTexture(bgTexture);
-	bgSprite.setTextureRect(IntRect(0, 0, window->getSize().x, window->getSize().y));
-    */
     this->speed = speed;
- 
-    
-    
+	window = new RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "MarioGame");
+
+    /*
+    bgTexture.loadFromFile("../assets/bg.png");
+    bgTexture.setRepeated(true);
+    bgSprite.setTexture(bgTexture);
+    bgSprite.setTextureRect(IntRect(0, 0, window->getSize().x, window->getSize().y));
+    */
 }
 
 void Game::update(void){
@@ -41,6 +39,10 @@ void Game::update(void){
          for (int i = 0; i < NUM_BRICKS; i++) {
              bricks[i].draw(window);
          }
+
+         mario.draw(*window);
+         turtles[0].draw(*window);
+         turtles[1].draw(*window);
 
          window->display();
          sf::sleep(sf::milliseconds(1000/speed));
@@ -83,5 +85,11 @@ void Game::drawBackground() {
         k += m;
         column = 0;
     }
+
+    mario.setPosition(Vector2f(450.f, 420.f));
+
+    turtles = new Turtle[2];
+    turtles[0].setPosition(Vector2f(250.f, 220.f));
+    turtles[1].setPosition(Vector2f(350.f, 320.f));
 
 }
