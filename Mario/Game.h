@@ -1,4 +1,5 @@
 #include "Common.h"
+#include "Brick.h"
 
 class Game {
 	RenderWindow* window;
@@ -20,6 +21,9 @@ class Game {
 
 	Texture pipeSLeftTexture;
 	Sprite pipeSLeftSprite;
+
+	Brick* bricks;
+
 public:
 	Game(int);
 	void update(void);
