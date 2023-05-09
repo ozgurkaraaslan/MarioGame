@@ -1,4 +1,5 @@
 #include"Game.h"
+#include "MainMenu.h"
 
 Game::Game(int speed) {
 
@@ -10,6 +11,8 @@ Game::Game(int speed) {
 	bgSprite.setTextureRect(IntRect(0, 0, window->getSize().x, window->getSize().y));
     */
     this->speed = speed;
+ 
+    
     
 }
 
