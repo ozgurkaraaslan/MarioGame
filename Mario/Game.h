@@ -4,6 +4,7 @@
 #include "backgroundObjects/PipeS.h"
 #include "backgroundObjects/Floor.h"
 #include "Mario.h"
+#include "Turtle.h"
 
 class Game {
 	RenderWindow* window;
@@ -14,6 +15,7 @@ class Game {
 	PipeS* pipeSs;
 	Floor* floor;
 	Mario mario;
+	Turtle* turtles;
 
 public:
 	Game(int);
