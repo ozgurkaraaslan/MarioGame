@@ -10,21 +10,6 @@ class Game {
 	//Sprite bgSprite;
 	int speed;
 
-	Texture floorTexture;
-	Sprite floorSprite;
-
-	Texture pipeLeftTexture;
-	Sprite pipeLeftSprite;
-
-	Texture pipeRightTexture;
-	Sprite pipeRightSprite;
-
-	Texture pipeSRightTexture;
-	Sprite pipeSRightSprite;
-
-	Texture pipeSLeftTexture;
-	Sprite pipeSLeftSprite;
-
 	Brick* bricks;
 	Pipe* pipes;
 	PipeS* pipeSs;
