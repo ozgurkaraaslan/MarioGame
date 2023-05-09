@@ -11,4 +11,4 @@ using namespace sf;
 #define NUM_BRICKS      76
 
 const int brick_nums[4] = { 28, 16, 8, 24 };
-const float brick_rows[4] = {300, 440, 480, 600};
+const float brick_rows[4] = {250, 450, 490, 660};

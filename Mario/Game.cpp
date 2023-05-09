@@ -76,18 +76,18 @@ void Game::drawBackground() {
     pipeLeftTexture.loadFromFile("../assets/pipe.png");
     pipeLeftSprite.setTexture(pipeLeftTexture);
     pipeLeftSprite.setScale(-1.f, 1.f);
-    pipeLeftSprite.setPosition(Vector2f(pipeLeftTexture.getSize().x, ((window->getSize().y) * 0.78)));
+    pipeLeftSprite.setPosition(Vector2f(pipeLeftTexture.getSize().x, ((window->getSize().y) * 0.8)));
 
     pipeRightTexture.loadFromFile("../assets/pipe.png");
     pipeRightSprite.setTexture(pipeRightTexture);
-    pipeRightSprite.setPosition(Vector2f((window->getSize().x - pipeRightTexture.getSize().x), (window->getSize().y) * 0.78));
+    pipeRightSprite.setPosition(Vector2f((window->getSize().x - pipeRightTexture.getSize().x), (window->getSize().y) * 0.8));
 
     pipeSLeftTexture.loadFromFile("../assets/pipeS.png");
     pipeSLeftSprite.setTexture(pipeSLeftTexture);
-    pipeSLeftSprite.setPosition(Vector2f(0, ((window->getSize().y) * 0.12)));
+    pipeSLeftSprite.setPosition(Vector2f(0, ((window->getSize().y) * 0.1)));
 
     pipeSRightTexture.loadFromFile("../assets/pipeS.png");
     pipeSRightSprite.setTexture(pipeSRightTexture);
     pipeSRightSprite.setScale(-1.f, 1.f);
-    pipeSRightSprite.setPosition(Vector2f((window->getSize().x), (window->getSize().y) * 0.12));
+    pipeSRightSprite.setPosition(Vector2f((window->getSize().x), (window->getSize().y) * 0.1));
 }
