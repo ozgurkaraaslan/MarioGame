@@ -11,28 +11,7 @@ Game::Game(int speed) {
     */
     this->speed = speed;
     
-    float row = 0;
-    float column = 0;
-
-    bricks = new Brick[NUM_BRICKS];
-    int k = 0,m=0;
-
-    for (int j = 0; j < (sizeof(brick_rows) / sizeof(float)); j++) { 
-        row = brick_rows[j];
-
-        if (j == 1)
-            column = 260;
-
-        for (m = 0; m < brick_nums[j]; m+=2) {
-
-
-            bricks[k+m].setPosition(Vector2f(float(column), float(row)));
-            bricks[k + m + 1].setPosition(Vector2f(float(window->getSize().x - column - bricks[k + m].texture.getSize().x), float(row)));
-            column += bricks[k + m].texture.getSize().x;
-        }
-        k += m;
-        column = 0;
-    }
+    
 }
 
 void Game::update(void){
@@ -90,4 +69,28 @@ void Game::drawBackground() {
     pipeSRightSprite.setTexture(pipeSRightTexture);
     pipeSRightSprite.setScale(-1.f, 1.f);
     pipeSRightSprite.setPosition(Vector2f((window->getSize().x), (window->getSize().y) * 0.1));
+
+    float row = 0;
+    float column = 0;
+
+    bricks = new Brick[NUM_BRICKS];
+    int k = 0, m = 0;
+
+    for (int j = 0; j < (sizeof(brick_rows) / sizeof(float)); j++) {
+        row = brick_rows[j];
+
+        if (j == 1)
+            column = 260;
+
+        for (m = 0; m < brick_nums[j]; m += 2) {
+
+
+            bricks[k + m].setPosition(Vector2f(float(column), float(row)));
+            bricks[k + m + 1].setPosition(Vector2f(float(window->getSize().x - column - bricks[k + m].texture.getSize().x), float(row)));
+            column += bricks[k + m].texture.getSize().x;
+        }
+        k += m;
+        column = 0;
+    }
+
 }
