@@ -3,6 +3,7 @@
 #include "backgroundObjects/Pipe.h"
 #include "backgroundObjects/PipeS.h"
 #include "backgroundObjects/Floor.h"
+#include "Mario.h"
 
 class Game {
 	RenderWindow* window;
@@ -12,6 +13,7 @@ class Game {
 	Pipe* pipes;
 	PipeS* pipeSs;
 	Floor* floor;
+	Mario mario;
 
 public:
 	Game(int);

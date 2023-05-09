@@ -2,6 +2,7 @@
 #include"../Common.h"
 
 class Background {
+protected:
 	Vector2f pos;
 public:
 	Texture texture;

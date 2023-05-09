@@ -42,6 +42,9 @@
     <ClCompile Include="backgroundObjects\Pipe.cpp">
       <Filter>Source Files\backgroundObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Mario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="backgroundObjects\PipeS.h">
       <Filter>Source Files\backgroundObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Mario.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

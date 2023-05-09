@@ -1,4 +1,6 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS 1 
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>

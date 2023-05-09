@@ -39,6 +39,9 @@ void Game::update(void){
              bricks[i].draw(window);
          }
 
+         mario.draw(*window);
+
+
          window->display();
          sf::sleep(sf::milliseconds(1000/speed));
      }
