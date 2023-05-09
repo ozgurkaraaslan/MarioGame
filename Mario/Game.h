@@ -1,13 +1,11 @@
 #include "Common.h"
-#include "Brick.h"
-#include "Pipe.h"
-#include "PipeS.h"
-#include "Floor.h"
+#include "backgroundObjects/Brick.h"
+#include "backgroundObjects/Pipe.h"
+#include "backgroundObjects/PipeS.h"
+#include "backgroundObjects/Floor.h"
 
 class Game {
 	RenderWindow* window;
-	//Texture bgTexture;
-	//Sprite bgSprite;
 	int speed;
 
 	Brick* bricks;

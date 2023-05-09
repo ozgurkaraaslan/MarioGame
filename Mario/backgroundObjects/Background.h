@@ -1,5 +1,5 @@
 #pragma once
-#include"Common.h"
+#include"../Common.h"
 
 class Background {
 	Vector2f pos;
