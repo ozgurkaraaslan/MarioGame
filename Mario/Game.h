@@ -2,8 +2,8 @@
 
 class Game {
 	RenderWindow* window;
-	Texture bgTexture;
-	Sprite bgSprite;
+	//Texture bgTexture;
+	//Sprite bgSprite;
 	int speed;
 
 	Texture floorTexture;
@@ -14,6 +14,12 @@ class Game {
 
 	Texture pipeRightTexture;
 	Sprite pipeRightSprite;
+
+	Texture pipeSRightTexture;
+	Sprite pipeSRightSprite;
+
+	Texture pipeSLeftTexture;
+	Sprite pipeSLeftSprite;
 public:
 	Game(int);
 	void update(void);
