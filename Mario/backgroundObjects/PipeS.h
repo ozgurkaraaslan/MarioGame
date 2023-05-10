@@ -5,5 +5,5 @@ class PipeS : public Background
 {
 
 public:
-	PipeS();
+	PipeS();	//defining Pipes constructor
 };

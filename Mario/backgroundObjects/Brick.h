@@ -4,5 +4,5 @@
 
 class Brick : public Background{
 public:
-	Brick();
+	Brick();	//defining brick constructor
 };

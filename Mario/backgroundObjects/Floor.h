@@ -4,6 +4,6 @@
 
 class Floor : public Background {
 public:
-	Floor();
+	Floor();	//defining Floor constructor
 };
 

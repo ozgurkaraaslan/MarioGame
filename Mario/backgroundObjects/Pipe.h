@@ -3,7 +3,7 @@
 #include "Background.h"
 class Pipe : public Background
 {
-
+	
 public:
-	Pipe();
+	Pipe();	//defining pipe constructor
 };
