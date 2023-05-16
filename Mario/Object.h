@@ -14,12 +14,12 @@ protected:
 	int heading;
 
 public:
-
 	//Object(RenderWindow* window);
 	void setPosition(Vector2f pos);
 	Vector2f getPosition();
 	IntRect boundingBox(void);
 	void draw(RenderWindow &window);
+	
 	/*
 	void move();
 	void fall();

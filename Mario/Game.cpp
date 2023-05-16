@@ -26,6 +26,25 @@ void Game::update(void){
              // "close requested" event: we close the window
              if (event.type == sf::Event::Closed)
                  window->close();
+             else if (event.type == sf::Event::KeyPressed) {
+
+                 if (event.key.code == sf::Keyboard::Up) {
+
+                     mario.move(Mario::MoveDirection::Up);
+                 }
+                 else if(event.key.code == sf::Keyboard::Down) {
+
+                     mario.move(Mario::MoveDirection::Down);
+                 }
+                 else if (event.key.code == sf::Keyboard::Right) {
+
+                     mario.move(Mario::MoveDirection::Rigth);
+                 }
+                 else if (event.key.code == sf::Keyboard::Left) {
+
+                     mario.move(Mario::MoveDirection::Left);
+                 }
+             }
          }
 
          window->clear();
