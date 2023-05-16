@@ -16,12 +16,8 @@ public:
 		Left,
 		Rigth
 	};
-	enum Direction {
-		L,
-		R
-	};
+	
 	Direction curDir;
-	Direction prevDir;
+	
 	void move(MoveDirection);
-	void setScale(float a, float b);
 };

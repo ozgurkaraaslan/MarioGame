@@ -10,18 +10,12 @@ Mario::Mario() {
 		textures[i].loadFromFile(path);
 	}
 
-	vx = 0;
+	vx = 20;
 	vy = 0;
 	state = 0;
 	Direction curDir = L;
 	Direction prevDir = L;
 	sprite.setTexture(textures[state]);
-
-}
-
-void Mario::setScale(float a, float b) {	//set the scale of sprites & can be used to flip objects
-
-	sprite.setScale(a, b);
 
 }
 
@@ -34,40 +28,48 @@ void Mario::move(MoveDirection dir){
 		if (dir == Left) {
 			state = 1;
 			curDir = L;
+			sprite.move(Vector2f(-vx, 0));
 		}
 		else if (dir == Rigth) {
 			state = 1;
 			curDir = R;
+			sprite.move(Vector2f(vx, 0));
 		}
 		break;
 	case 1:
 		if (dir == Left) {
 			state = 2;
 			curDir = L;
+			sprite.move(Vector2f(-vx, 0));
 		}
 		else if (dir == Rigth) {
 			state = 2;
 			curDir = R;
+			sprite.move(Vector2f(vx, 0));
 		}
 		break;
 	case 2:
 		if (dir == Left) {
 			state = 3;
 			curDir = L;
+			sprite.move(Vector2f(-vx, 0));
 		}
 		else if (dir == Rigth) {
 			state = 3;
 			curDir = R;
+			sprite.move(Vector2f(vx, 0));
 		}
 		break;
 	case 3:
 		if (dir == Left) {
 			state = 1;
 			curDir = L;
+			sprite.move(Vector2f(-vx, 0));
 		}
 		else if (dir == Rigth) {
 			state = 1;
 			curDir = R;
+			sprite.move(Vector2f(vx, 0));
 		}
 		break;
 	}

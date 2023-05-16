@@ -19,7 +19,11 @@ public:
 	Vector2f getPosition();
 	IntRect boundingBox(void);
 	void draw(RenderWindow &window);
-	
+	enum Direction {
+		L,
+		R
+	};
+	Direction prevDir;
 	/*
 	void move();
 	void fall();
