@@ -22,7 +22,9 @@ public:
 	void draw(RenderWindow &window);
 	enum Direction {
 		L,
-		R
+		R,
+		LI,
+		RI
 	};
 	Direction prevDir;
 	/*

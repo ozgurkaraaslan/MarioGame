@@ -26,7 +26,7 @@ Game::Game(int speed) {
 
     }
     cout << "test" << endl;
-    */
+    
     /*
     bgTexture.loadFromFile("../assets/bg.png");
     bgTexture.setRepeated(true);
@@ -50,7 +50,7 @@ void Game::update(void){
              else if (event.type == sf::Event::KeyPressed) {
 
                  if (event.key.code == sf::Keyboard::Up) {
-                     mario.vy = -0.1;
+                     mario.vy = -0.03;
                      if (onFLoor(mario)) {
                          while (mario.vy <= 0) {
                              mario.jump(false);
@@ -69,9 +69,12 @@ void Game::update(void){
                      mario.move(Mario::MoveDirection::Left);
                  }
              }
+             else if (event.type == sf::Event::KeyReleased) {
+                 mario.move(Mario::MoveDirection::Idle);
+             }
 
          }
-         if (not onFLoor(mario) && mario.vy >=-1) {
+         if (not onFLoor(mario) && mario.vy >=-0.05) {
              mario.jump(true);
          }
 

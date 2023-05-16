@@ -13,8 +13,8 @@ Mario::Mario() {
 	vx = 10;
 	vy = 0;
 	state = 0;
-	Direction curDir = L;
-	Direction prevDir = L;
+	Direction curDir = LI;
+	Direction prevDir = LI;
 	sprite.setTexture(textures[state]);
 
 }
@@ -47,6 +47,13 @@ void Mario::move(MoveDirection dir){
 			curDir = R;
 			sprite.move(Vector2f(float(vx), 0));
 		}
+		else if (dir == Idle) {
+			state = 0;
+			if (prevDir == L || prevDir == LI)
+				curDir = LI;
+			else
+				curDir = RI;
+		}
 		break;
 	case 2:
 		if (dir == Left) {
@@ -58,6 +65,13 @@ void Mario::move(MoveDirection dir){
 			state = 3;
 			curDir = R;
 			sprite.move(Vector2f(float(vx), 0));
+		}
+		else if (dir == Idle) {
+			state = 0;
+			if (prevDir == L || prevDir == LI)
+				curDir = LI;
+			else
+				curDir = RI;
 		}
 		break;
 	case 3:
@@ -71,16 +85,22 @@ void Mario::move(MoveDirection dir){
 			curDir = R;
 			sprite.move(Vector2f(float(vx), 0));
 		}
+		else if (dir == Idle) {
+			state = 0;
+			if (prevDir == L || prevDir == LI)
+				curDir = LI;
+			else
+				curDir = RI;
+		}
 		break;
 	}
 
-
 	if (curDir != prevDir) {
-		if (curDir == R) {
+		if (curDir == R && prevDir  != RI) {
 			sprite.setScale(-1.f, 1.f);
 			sprite.move(Vector2f(float(textures[state].getSize().x), 0));
 		}
-		else if (curDir == L) {
+		else if (curDir == L && prevDir != LI) {
 			sprite.setScale(1.f, 1.f);
 			sprite.move(Vector2f(float(-1.f * textures[state].getSize().x), 0));
 		}
@@ -96,7 +116,7 @@ void Mario::jump(bool down) {
 		sprite.setTexture(textures[state]);
 	}
 	else {
-		vy += 0.00002;
+		vy += 0.000002;
 		sprite.move(Vector2f(0, vy));
 		sprite.setTexture(textures[state]);
 	}
