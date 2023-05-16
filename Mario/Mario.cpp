@@ -96,18 +96,15 @@ void Mario::jump(bool down) {
 		sprite.setTexture(textures[state]);
 	}
 	else {
-		sprite.move(Vector2f(0, -70));
+		vy += 0.00002;
+		sprite.move(Vector2f(0, vy));
 		sprite.setTexture(textures[state]);
 	}
 }
-/*
+
 void Mario::fall() {
 	
 	state = 6;
-	sprite.move(Vector2f(0, -50));
 	sprite.setTexture(textures[state]);
-
-	while (sprite.getPosition().x < WINDOW_HEIGHT+40) {
-		sprite.move(Vector2f(0, 20));
-	}
-}*/
+	sprite.move(Vector2f(0, 20));
+}

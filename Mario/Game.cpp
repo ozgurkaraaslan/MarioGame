@@ -4,7 +4,8 @@ Game::Game(int speed) {
 
     this->speed = speed;
 	window = new RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "MarioGame");
-
+    
+    /*
     mainMenu.draw(*window);
 
     sf::Event event;
@@ -24,10 +25,9 @@ Game::Game(int speed) {
             }
         }
 
-
     }
     cout << "test" << endl;
-
+    */
     /*
     bgTexture.loadFromFile("../assets/bg.png");
     bgTexture.setRepeated(true);
@@ -51,10 +51,15 @@ void Game::update(void){
              else if (event.type == sf::Event::KeyPressed) {
 
                  if (event.key.code == sf::Keyboard::Up) {
-
+                     mario.vy = -0.1;
                      if (onFLoor(mario)) {
-                         mario.jump(false);
+                         while (mario.vy <= 0) {
+                             mario.jump(false);
+                             mario.draw(*window);
+                         }
+                         mario.vy = 0;
                      }
+                     
                  }
                  else if (event.key.code == sf::Keyboard::Right) {
 
@@ -67,9 +72,14 @@ void Game::update(void){
              }
 
          }
-         if (not onFLoor(mario)) {
+         if (not onFLoor(mario) && mario.vy >=-1) {
              mario.jump(true);
          }
+
+         /*
+         if (mario.sprite.getPosition().y < WINDOW_HEIGHT - 100) {
+             mario.fall();
+         }*/
          
          window->clear();
          
@@ -82,13 +92,13 @@ void Game::update(void){
          for (int i = 0; i < NUM_BRICKS; i++) {
              bricks[i].draw(window);
          }
-         //mario.fall();
 
          mario.draw(*window);
          turtles[0].draw(*window);
          turtles[1].draw(*window);
 
          window->display();
+
          sf::sleep(sf::milliseconds(1000/speed));
      }
 }
