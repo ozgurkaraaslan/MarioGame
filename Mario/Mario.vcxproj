@@ -146,6 +146,7 @@
     <ClCompile Include="backgroundObjects\PipeS.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Turtle.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="backgroundObjects\PipeS.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Turtle.h" />

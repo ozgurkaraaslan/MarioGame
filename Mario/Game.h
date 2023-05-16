@@ -5,6 +5,7 @@
 #include "backgroundObjects/Floor.h"
 #include "Mario.h"
 #include "Turtle.h"
+#include "MainMenu.h"
 
 class Game {
 	RenderWindow* window;
@@ -16,9 +17,11 @@ class Game {
 	Floor* floor;
 	Mario mario;
 	Turtle* turtles;
+	MainMenu mainMenu;
 
 public:
 	Game(int);
 	void update(void);
 	void drawBackground();
+	bool onFLoor(Object &obj);
 };

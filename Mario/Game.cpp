@@ -1,10 +1,32 @@
 #include"Game.h"
-#include "MainMenu.h"
 
 Game::Game(int speed) {
 
     this->speed = speed;
 	window = new RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "MarioGame");
+
+    mainMenu.draw(*window);
+
+    sf::Event event;
+    while (window->isOpen() && mainMenu.startGame) {
+        while (window->pollEvent(event)) {
+
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Enter) {
+                    window->clear();
+                    mainMenu.startGame = false;
+                }
+            }
+
+            else if (event.type == sf::Event::Closed) {
+                window->close();
+
+            }
+        }
+
+
+    }
+    cout << "test" << endl;
 
     /*
     bgTexture.loadFromFile("../assets/bg.png");
@@ -30,11 +52,9 @@ void Game::update(void){
 
                  if (event.key.code == sf::Keyboard::Up) {
 
-                     mario.move(Mario::MoveDirection::Up);
-                 }
-                 else if(event.key.code == sf::Keyboard::Down) {
-
-                     mario.move(Mario::MoveDirection::Down);
+                     if (onFLoor(mario)) {
+                         mario.jump(false);
+                     }
                  }
                  else if (event.key.code == sf::Keyboard::Right) {
 
@@ -45,8 +65,12 @@ void Game::update(void){
                      mario.move(Mario::MoveDirection::Left);
                  }
              }
-         }
 
+         }
+         if (not onFLoor(mario)) {
+             mario.jump(true);
+         }
+         
          window->clear();
          
          floor->draw(window);
@@ -58,6 +82,7 @@ void Game::update(void){
          for (int i = 0; i < NUM_BRICKS; i++) {
              bricks[i].draw(window);
          }
+         //mario.fall();
 
          mario.draw(*window);
          turtles[0].draw(*window);
@@ -69,6 +94,7 @@ void Game::update(void){
 }
 void Game::drawBackground() {
 
+    
 
     floor = new Floor;
     floor->setPosition(Vector2f(0, (window->getSize().y) * 0.87));
@@ -105,10 +131,23 @@ void Game::drawBackground() {
         column = 0;
     }
 
-    mario.setPosition(Vector2f(450.f, 420.f));
+    mario.setPosition(Vector2f(450.f, 220.f));
 
     turtles = new Turtle[2];
     turtles[0].setPosition(Vector2f(250.f, 220.f));
     turtles[1].setPosition(Vector2f(350.f, 320.f));
 
+}
+
+bool Game::onFLoor(Object &obj){
+
+    for(int i = 0; i < NUM_BRICKS; i++){
+        if (obj.sprite.getGlobalBounds().intersects(bricks[i].sprite.getGlobalBounds()))
+            return true;
+    }
+    if (obj.sprite.getGlobalBounds().intersects(floor->sprite.getGlobalBounds()))
+        return true;
+
+    return false;
+    
 }

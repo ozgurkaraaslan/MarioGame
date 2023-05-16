@@ -2,11 +2,11 @@
 class MainMenu {
 public:
 	Font font;
-	Text text;
+	Text title;
+	Text menu;
 	MainMenu();
-	void checkEntry();
-	void draw(RenderWindow* window);
-
+	void draw(RenderWindow &window);
+	bool startGame = true;
 
 
 };

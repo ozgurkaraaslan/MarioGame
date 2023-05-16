@@ -8,12 +8,13 @@ protected:
 	RenderWindow* window;
 
 	Texture textures[7];
-	Sprite sprite;
+	
 
 	int state;
 	int heading;
 
 public:
+	Sprite sprite;
 	//Object(RenderWindow* window);
 	void setPosition(Vector2f pos);
 	Vector2f getPosition();
@@ -27,5 +28,6 @@ public:
 	/*
 	void move();
 	void fall();
-	void jump(bool down);*/
+	void jump(bool down);
+	*/
 };

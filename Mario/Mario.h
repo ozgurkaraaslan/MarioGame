@@ -4,15 +4,15 @@
 
 class Mario : public Object{
 	
+	
+public:
 	float vx;
 	float vy;
-public:
 	Mario();
 	void jump(bool down);
 	void fall();
 	enum MoveDirection {
 		Up,
-		Down,
 		Left,
 		Rigth
 	};

@@ -10,7 +10,7 @@ Mario::Mario() {
 		textures[i].loadFromFile(path);
 	}
 
-	vx = 20;
+	vx = 10;
 	vy = 0;
 	state = 0;
 	Direction curDir = L;
@@ -28,48 +28,48 @@ void Mario::move(MoveDirection dir){
 		if (dir == Left) {
 			state = 1;
 			curDir = L;
-			sprite.move(Vector2f(-vx, 0));
+			sprite.move(Vector2f(float(-vx), 0));
 		}
 		else if (dir == Rigth) {
 			state = 1;
 			curDir = R;
-			sprite.move(Vector2f(vx, 0));
+			sprite.move(Vector2f(float(vx), 0));
 		}
 		break;
 	case 1:
 		if (dir == Left) {
 			state = 2;
 			curDir = L;
-			sprite.move(Vector2f(-vx, 0));
+			sprite.move(Vector2f(-float(vx), 0));
 		}
 		else if (dir == Rigth) {
 			state = 2;
 			curDir = R;
-			sprite.move(Vector2f(vx, 0));
+			sprite.move(Vector2f(float(vx), 0));
 		}
 		break;
 	case 2:
 		if (dir == Left) {
 			state = 3;
 			curDir = L;
-			sprite.move(Vector2f(-vx, 0));
+			sprite.move(Vector2f(-float(vx), 0));
 		}
 		else if (dir == Rigth) {
 			state = 3;
 			curDir = R;
-			sprite.move(Vector2f(vx, 0));
+			sprite.move(Vector2f(float(vx), 0));
 		}
 		break;
 	case 3:
 		if (dir == Left) {
 			state = 1;
 			curDir = L;
-			sprite.move(Vector2f(-vx, 0));
+			sprite.move(Vector2f(-float(vx), 0));
 		}
 		else if (dir == Rigth) {
 			state = 1;
 			curDir = R;
-			sprite.move(Vector2f(vx, 0));
+			sprite.move(Vector2f(float(vx), 0));
 		}
 		break;
 	}
@@ -89,3 +89,25 @@ void Mario::move(MoveDirection dir){
 	sprite.setTexture(textures[state]);
 }
 
+void Mario::jump(bool down) {
+
+	if (down) {
+		sprite.move(Vector2f(0, 10));
+		sprite.setTexture(textures[state]);
+	}
+	else {
+		sprite.move(Vector2f(0, -70));
+		sprite.setTexture(textures[state]);
+	}
+}
+/*
+void Mario::fall() {
+	
+	state = 6;
+	sprite.move(Vector2f(0, -50));
+	sprite.setTexture(textures[state]);
+
+	while (sprite.getPosition().x < WINDOW_HEIGHT+40) {
+		sprite.move(Vector2f(0, 20));
+	}
+}*/
