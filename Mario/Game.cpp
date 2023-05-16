@@ -4,13 +4,12 @@ Game::Game(int speed) {
 
     this->speed = speed;
 	window = new RenderWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "MarioGame");
-    
-    /*
+    window->clear();
     mainMenu.draw(*window);
 
     sf::Event event;
     while (window->isOpen() && mainMenu.startGame) {
-        while (window->pollEvent(event)) {
+        while (window->pollEvent(event) && mainMenu.startGame) {
 
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Enter) {
