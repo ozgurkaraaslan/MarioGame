@@ -8,7 +8,7 @@ protected:
 	RenderWindow* window;
 
 	Texture textures[7];
-	
+	bool dead;
 
 	int state;
 	int heading;

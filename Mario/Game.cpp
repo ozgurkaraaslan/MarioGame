@@ -65,8 +65,17 @@ void Game::update(void){
              else if (event.type == sf::Event::KeyReleased) {
                  mario.move(Mario::MoveDirection::Idle);
              }
+             
 
          }
+         for (int i = 0; i < 2; i++) {
+             turtles[i].move();
+             turtles[i].edgeHit();
+             if (!(onFLoor(turtles[i]))) {
+                 turtles[i].jump(true);
+             }
+         }
+         
          if (not onFLoor(mario) && mario.vy >=-0.05) {
              mario.jump(true);
          }

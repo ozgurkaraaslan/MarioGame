@@ -9,7 +9,7 @@ public:
 	float vx;
 	float vy=0;
 	Mario();
-	void jump(bool down);
+	void jump(bool down); 
 	void fall();
 	enum MoveDirection {
 		Up,
