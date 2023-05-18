@@ -29,6 +29,7 @@ public:
 	void boundingBox(const FloatRect& hitbox) {
 		m_hitbox = hitbox;
 	}
+	void edgeHit();
 	Direction prevDir;
 	/*
 	void move();

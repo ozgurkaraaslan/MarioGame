@@ -60,6 +60,7 @@ void Game::update(void){
 
                      mario.move(Mario::MoveDirection::Left);
                  }
+                 mario.edgeHit(); //checks if mario is at the edge
              }
              else if (event.type == sf::Event::KeyReleased) {
                  mario.move(Mario::MoveDirection::Idle);
@@ -69,7 +70,7 @@ void Game::update(void){
          if (not onFLoor(mario) && mario.vy >=-0.05) {
              mario.jump(true);
          }
-
+         mario.edgeHit(); //checks if mario is at the edge
          /*
          if (mario.sprite.getPosition().y < WINDOW_HEIGHT - 100) {
              mario.fall();
