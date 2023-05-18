@@ -2,7 +2,7 @@
 #include "Common.h"
 #include "Object.h"
 
-class Mario : public Object{
+class Mario : public Object  {
 	
 	
 public:
@@ -20,5 +20,7 @@ public:
 	
 	Direction curDir;
 	
+	
+
 	void move(MoveDirection);
 };

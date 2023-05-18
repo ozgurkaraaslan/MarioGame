@@ -25,14 +25,6 @@ Game::Game(int speed) {
         }
 
     }
-    cout << "test" << endl;
-    
-    /*
-    bgTexture.loadFromFile("../assets/bg.png");
-    bgTexture.setRepeated(true);
-    bgSprite.setTexture(bgTexture);
-    bgSprite.setTextureRect(IntRect(0, 0, window->getSize().x, window->getSize().y));
-    */
 }
 
 void Game::update(void){
@@ -143,7 +135,7 @@ void Game::drawBackground() {
         column = 0;
     }
 
-    mario.setPosition(Vector2f(450.f, 220.f));
+    mario.setPosition(Vector2f(450.f, 220.f));  
 
     turtles = new Turtle[2];
     turtles[0].setPosition(Vector2f(250.f, 220.f));
@@ -153,8 +145,10 @@ void Game::drawBackground() {
 
 bool Game::onFLoor(Object &obj){
 
+    obj.boundingBox({ float(obj.sprite.getGlobalBounds().left) , float(obj.sprite.getGlobalBounds().top + obj.sprite.getGlobalBounds().height * 0.95 ) ,float(obj.sprite.getGlobalBounds().width) , float(obj.sprite.getGlobalBounds().height * 0.05)  });
+
     for(int i = 0; i < NUM_BRICKS; i++){
-        if (obj.sprite.getGlobalBounds().intersects(bricks[i].sprite.getGlobalBounds()))
+        if (obj.m_hitbox.intersects(bricks[i].sprite.getGlobalBounds()))
             return true;
     }
     if (obj.sprite.getGlobalBounds().intersects(floor->sprite.getGlobalBounds()))

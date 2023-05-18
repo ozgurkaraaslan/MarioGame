@@ -12,13 +12,13 @@ protected:
 
 	int state;
 	int heading;
-
+	
 public:
+	FloatRect m_hitbox;
 	Sprite sprite;
 	//Object(RenderWindow* window);
 	void setPosition(Vector2f pos);
 	Vector2f getPosition();
-	IntRect boundingBox(void);
 	void draw(RenderWindow &window);
 	enum Direction {
 		L,
@@ -26,6 +26,9 @@ public:
 		LI,
 		RI
 	};
+	void boundingBox(const FloatRect& hitbox) {
+		m_hitbox = hitbox;
+	}
 	Direction prevDir;
 	/*
 	void move();

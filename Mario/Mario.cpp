@@ -15,8 +15,6 @@ Mario::Mario() {
 	state = 0;
 	Direction curDir = LI;
 	Direction prevDir = LI;
-	sprite.setTexture(textures[state]);
-
 }
 
 void Mario::move(MoveDirection dir){
