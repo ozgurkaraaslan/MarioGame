@@ -10,7 +10,7 @@ Turtle::Turtle() {
 		textures[i].loadFromFile(path);
 	}
 
-	vx = 10; //set initial speed in spawn
+	vx = 6; //set initial speed in spawn
 	vy = 0;
 	state = 0;
 	sprite.setTexture(textures[state]);

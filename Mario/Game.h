@@ -18,7 +18,9 @@ class Game {
 	Mario mario;
 	Turtle* turtles;
 	MainMenu mainMenu;
-
+	float elapsedTime;
+	Clock clock;
+	int turtleNumber = 1;
 public:
 	Game(int);
 	void update(void);

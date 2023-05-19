@@ -25,6 +25,8 @@ Game::Game(int speed) {
         }
 
     }
+
+    elapsedTime = clock.getElapsedTime().asSeconds();
 }
 
 void Game::update(void){
@@ -68,7 +70,8 @@ void Game::update(void){
              
 
          }
-         for (int i = 0; i < 2; i++) {
+         
+         for (int i = 0; i < turtleNumber; i++) {
              turtles[i].move();
              turtles[i].edgeHit();
              if (!(onFLoor(turtles[i]))) {
@@ -87,6 +90,19 @@ void Game::update(void){
          
          window->clear();
          
+         if (turtleNumber < 6) {
+             if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
+                 turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
+                 turtleNumber += 1;
+                 elapsedTime = clock.getElapsedTime().asSeconds();
+             }
+         }
+         
+         for(int i = 0; i < turtleNumber; i++) {
+             turtles[i].draw(*window);
+         }
+         
+
          floor->draw(window);
          pipeSs[0].draw(window);
          pipeSs[1].draw(window);
@@ -98,8 +114,7 @@ void Game::update(void){
          }
 
          mario.draw(*window);
-         turtles[0].draw(*window);
-         turtles[1].draw(*window);
+         
 
          window->display();
 
@@ -147,9 +162,8 @@ void Game::drawBackground() {
 
     mario.setPosition(Vector2f(450.f, 220.f));  
 
-    turtles = new Turtle[2];
-    turtles[0].setPosition(Vector2f(250.f, 220.f));
-    turtles[1].setPosition(Vector2f(350.f, 320.f));
+    turtles = new Turtle[5];
+    turtles[0].setPosition(Vector2f(138.f, 105.f));
 
 }
 
@@ -163,6 +177,14 @@ bool Game::onFLoor(Object &obj){
     }
     if (obj.sprite.getGlobalBounds().intersects(floor->sprite.getGlobalBounds()))
         return true;
+
+    for (int i = 0; i < 2; i++) {
+        if (obj.sprite.getGlobalBounds().intersects(pipeSs[i].sprite.getGlobalBounds()))
+            return true;
+        if (obj.sprite.getGlobalBounds().intersects(pipes[i].sprite.getGlobalBounds()))
+            return true;
+    }
+    
 
     return false;
     
