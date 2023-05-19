@@ -67,11 +67,7 @@ void Game::update(void){
              else if (event.type == sf::Event::KeyReleased) {
                  mario.move(Mario::MoveDirection::Idle);
              }
-             
-
          }
-         
-         
          
          if (not onFLoor(mario) && mario.vy >=-0.05) {
              mario.jump(true);
@@ -86,14 +82,25 @@ void Game::update(void){
          
          if (turtleNumber < 5) {
              if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
-                 turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
+                 if (turtleNumber % 2 == 0) {
+                     turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
+                 }
+                 else {
+                     turtles[turtleNumber].setPosition(Vector2f(862.f, 105.f));
+                 }
                  turtleNumber += 1;
                  elapsedTime = clock.getElapsedTime().asSeconds();
              }
          }
          
          for (int i = 0; i < turtleNumber; i++) {
-             turtles[i].move();
+             if (i % 2 == 0) {
+                 turtles[i].move(Turtle::MoveDirection::Rigth);
+             }
+             else {
+                 turtles[i].move(Turtle::MoveDirection::Left);
+             }
+             
              turtles[i].edgeHit();
              if (!(onFLoor(turtles[i]))) {
                  turtles[i].jump(true);

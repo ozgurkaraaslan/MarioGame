@@ -14,47 +14,70 @@ Turtle::Turtle() {
 	vy = 0;
 	state = 0;
 	sprite.setTexture(textures[state]);
-	dir = R;
+
+	Direction curDir = R;
+	Direction prevDir = R;
 
 }
-void Turtle::move() {
+void Turtle::move(MoveDirection dir) {
+
+	prevDir = curDir;
+
 	switch (state)
 	{
 	case 0:
-		if (dir == R) {
+		if (dir == Rigth) {
 			sprite.move(float(vx), 0);
 			state=1;
-			}
-		else if (dir==L)
+			curDir = R;
+		}
+		else if (dir == Left)
 		{
 			sprite.move(float(-vx), 0);
 			state = 1;
+			curDir = L;
 		}
 		break;
 	case 1:
-		if (dir == R) {
+		if (dir == Rigth) {
 			sprite.move(float(vx), 0);
 			state = 2;
+			curDir = R;
 		}
-		else if (dir == L)
+		else if (dir == Left)
 		{
 			sprite.move(float(-vx), 0);
 			state = 2;
+			curDir = L;
 		}
 		break;
 	case 2:
-		if (dir == R) {
+		if (dir == Rigth) {
 			sprite.move(float(vx), 0);
 			state = 0;
+			curDir = R;
 		}
-		else if (dir == L)
+		else if (dir == Left)
 		{
 			sprite.move(float(-vx), 0);
-			state =0;
+			state = 0;
+			curDir = L;
 		}
 		break;
 	
 	}
+
+	if (prevDir != curDir) {
+		if (curDir == L) {
+			sprite.setScale(-1.f, 1.f);
+			sprite.move(Vector2f(float(textures[state].getSize().x), 0));
+		}
+		else if (curDir == R) {
+			sprite.setScale(1.f, 1.f);
+			sprite.move(Vector2f(float(-1.f * textures[state].getSize().x), 0));
+		}
+	}
+
 	sprite.setTexture(textures[state]);
 	
 }

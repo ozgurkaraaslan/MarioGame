@@ -6,11 +6,15 @@ class Turtle : public Object {
 
 	float vx, vy;
 	Int32 time;
-	Direction dir;
-
+	
 public:
+	enum MoveDirection {
+		Left,
+		Rigth
+	};
+	Direction curDir,prevDir;
 	Turtle();
-	void move();
+	void move(MoveDirection);
 	void jump(bool down);
 	void fall();
 	

@@ -17,7 +17,7 @@ Mario::Mario() {
 	Direction prevDir = LI;
 }
 
-void Mario::move(MoveDirection dir){
+void Mario::move(MoveDirection dir) {
 
 	prevDir = curDir;
 
