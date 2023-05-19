@@ -71,13 +71,7 @@ void Game::update(void){
 
          }
          
-         for (int i = 0; i < turtleNumber; i++) {
-             turtles[i].move();
-             turtles[i].edgeHit();
-             if (!(onFLoor(turtles[i]))) {
-                 turtles[i].jump(true);
-             }
-         }
+         
          
          if (not onFLoor(mario) && mario.vy >=-0.05) {
              mario.jump(true);
@@ -90,7 +84,7 @@ void Game::update(void){
          
          window->clear();
          
-         if (turtleNumber < 6) {
+         if (turtleNumber < 5) {
              if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
                  turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
                  turtleNumber += 1;
@@ -98,10 +92,17 @@ void Game::update(void){
              }
          }
          
+         for (int i = 0; i < turtleNumber; i++) {
+             turtles[i].move();
+             turtles[i].edgeHit();
+             if (!(onFLoor(turtles[i]))) {
+                 turtles[i].jump(true);
+             }
+         }
+
          for(int i = 0; i < turtleNumber; i++) {
              turtles[i].draw(*window);
          }
-         
 
          floor->draw(window);
          pipeSs[0].draw(window);
@@ -115,15 +116,12 @@ void Game::update(void){
 
          mario.draw(*window);
          
-
          window->display();
 
          sf::sleep(sf::milliseconds(1000/speed));
      }
 }
 void Game::drawBackground() {
-
-    
 
     floor = new Floor;
     floor->setPosition(Vector2f(0, (window->getSize().y) * 0.87));
@@ -181,10 +179,9 @@ bool Game::onFLoor(Object &obj){
     for (int i = 0; i < 2; i++) {
         if (obj.sprite.getGlobalBounds().intersects(pipeSs[i].sprite.getGlobalBounds()))
             return true;
-        if (obj.sprite.getGlobalBounds().intersects(pipes[i].sprite.getGlobalBounds()))
-            return true;
+        /*if (obj.sprite.getGlobalBounds().intersects(pipes[i].sprite.getGlobalBounds()))
+            return true;*/
     }
-    
 
     return false;
     
