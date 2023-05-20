@@ -22,9 +22,12 @@ class Game {
 	Clock clock;
 	int turtleNumber = 1;
 	bool jumpFlag = false;
+	bool checkCollusionFlag = false;
+	bool rebornFlag = true;
 public:
 	Game(int);
 	void update(void);
 	void drawBackground();
 	bool onFLoor(Object &obj);
+	bool checkCollusion(int& side);
 };

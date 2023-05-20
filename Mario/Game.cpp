@@ -43,19 +43,24 @@ void Game::update(void){
                  window->close();
              else if (event.type == sf::Event::KeyPressed) {
 
-                 if (event.key.code == sf::Keyboard::Up && jumpFlag == false) {
-                     mario.vy = -33.f;
-                     jumpFlag = true;
-                     
-                     
-                 }
-                 else if (event.key.code == sf::Keyboard::Right) {
+                 if (rebornFlag) {
+                     if (event.key.code == sf::Keyboard::Up && jumpFlag == false) {
 
-                     mario.move(Mario::MoveDirection::Rigth);
-                 }
-                 else if (event.key.code == sf::Keyboard::Left) {
+                         mario.vy = -20.f;
+                         jumpFlag = true;
+                     }
+                     else if (event.key.code == sf::Keyboard::Right) {
 
-                     mario.move(Mario::MoveDirection::Left);
+                         mario.move(Mario::MoveDirection::Rigth);
+                     }
+                     else if (event.key.code == sf::Keyboard::Left) {
+
+                         mario.move(Mario::MoveDirection::Left);
+                     }
+                 }
+                 if (event.key.code == sf::Keyboard::Enter) {
+
+                     rebornFlag = true;
                  }
                  mario.edgeHit(); //checks if mario is at the edge
              }
@@ -64,36 +69,48 @@ void Game::update(void){
              }
          }
 
-         if (jumpFlag == false) {
-             if (onFLoor(mario)) {
-                 mario.vy = 0;
-             }
-             else{
-                 mario.jump(true);
-             }
+         int side_ = 1;
+         if (checkCollusion(side_)) {
 
-             
-         }
-         
-
-         if (jumpFlag) {
-             mario.jump(false);
-
-             if (onFLoor(mario)) {
-                 mario.vy = 0;
-                 jumpFlag = false;
-             }
+             rebornFlag = false;
+             checkCollusionFlag = true;
          }
 
-         mario.edgeHit(); //checks if mario is at the edge
-         /*
-         if (mario.sprite.getPosition().y < WINDOW_HEIGHT - 100) {
+         if (checkCollusionFlag) {
              mario.fall();
-         }*/
+
+             if (mario.sprite.getPosition().y > WINDOW_HEIGHT - 90) {
+                 checkCollusionFlag = false;
+                 mario.setPosition(Vector2f(490.f, 50.f));
+                 mario.move(Mario::MoveDirection::Idle);
+             }
+         }
+         else if (rebornFlag == true){
+
+             if (not jumpFlag) {
+                 if (onFLoor(mario)) {
+                     mario.vy = 0;
+                 }
+                 else {
+                     mario.jump(true);
+                 }
+
+             }
+             else {
+                 mario.jump(false);
+
+                 if (onFLoor(mario)) {
+                     mario.vy = 0;
+                     jumpFlag = false;
+                 }
+             }
+
+             mario.edgeHit(); //checks if mario is at the edge
+         }
          
          
-         if (turtleNumber < 5) {    //turtle spawn
-             if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
+         if (turtleNumber < MAX_TURTLE_NUMBER) {    //turtle spawn
+             if (clock.getElapsedTime().asSeconds() - elapsedTime > 10) {
                  if (turtleNumber % 2 == 0) {
                      turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
                  }
@@ -115,8 +132,6 @@ void Game::update(void){
              turtles[i].pipeTeleport();
              turtles[i].edgeHit();  //checks if turtles hit boundary of window
 
-             
-
              if (!(onFLoor(turtles[i]))) {  //checks if turtles are on the floor
                  turtles[i].jump(true);
              }
@@ -124,19 +139,19 @@ void Game::update(void){
 
          window->clear();
 
+         for (int i = 0; i < NUM_BRICKS; i++) {
+             bricks[i].draw(window);
+         }
+         floor->draw(window);
+
          for(int i = 0; i < turtleNumber; i++) {    //draws the turtles
              turtles[i].draw(*window);
          }
-
-         floor->draw(window);
+         
          pipeSs[0].draw(window);
          pipeSs[1].draw(window);
          pipes[0].draw(window);
          pipes[1].draw(window);
-
-         for (int i = 0; i < NUM_BRICKS; i++) {
-             bricks[i].draw(window);
-         }
 
          mario.draw(*window);
          
@@ -182,9 +197,9 @@ void Game::drawBackground() {
         column = 0;
     }
 
-    mario.setPosition(Vector2f(450.f, 220.f));  
+    mario.setPosition(Vector2f(467.f, 220.f));  
 
-    turtles = new Turtle[5];
+    turtles = new Turtle[MAX_TURTLE_NUMBER];
     turtles[0].setPosition(Vector2f(138.f, 105.f));
 
 }
@@ -209,4 +224,23 @@ bool Game::onFLoor(Object &obj){
 
     return false;
     
+}
+
+bool Game::checkCollusion(int& side) {
+
+    if (side == 0) {    // top
+
+    }
+    else if (side == 1) {  // left or right
+
+        for (int i = 0; i < turtleNumber; i++) {
+            
+            turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top + turtles[i].sprite.getGlobalBounds().height * 0.1) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.9) });
+            if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }

@@ -19,8 +19,5 @@ public:
 	};
 	
 	Direction curDir;
-	
-	
-
 	void move(MoveDirection);
 };

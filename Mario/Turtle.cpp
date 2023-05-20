@@ -10,7 +10,7 @@ Turtle::Turtle() {
 		textures[i].loadFromFile(path);
 	}
 
-	vx = 6; //set initial speed in spawn
+	vx = 2; //set initial speed in spawn
 	vy = 0;
 	state = 0;
 	sprite.setTexture(textures[state]);
@@ -83,7 +83,7 @@ void Turtle::move(MoveDirection dir) {
 }
 void Turtle::jump(bool down) { // turtle falls down edge
 	if (down) {
-		sprite.move(Vector2f(0, 10));
+		sprite.move(Vector2f(0, 8));
 		sprite.setTexture(textures[state]);
 	}
 }
