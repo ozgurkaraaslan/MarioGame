@@ -120,7 +120,7 @@ void Game::update(void){
          
          
          if (turtleNumber < MAX_TURTLE_NUMBER) {    //turtle spawn
-             if (clock.getElapsedTime().asSeconds() - elapsedTime > 10) {
+             if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {
                  if (turtleNumber % 2 == 0) {
                      turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
                  }
