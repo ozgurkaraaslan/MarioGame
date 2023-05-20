@@ -17,6 +17,7 @@ public:
 	void move(MoveDirection);
 	void jump(bool down);
 	void fall();
+	void pipeTeleport();
 	
 	
 };

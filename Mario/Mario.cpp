@@ -4,7 +4,7 @@ Mario::Mario() {
 
 	char path[64];
 
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 7; i++)	//storing mario textures on a array
 	{
 		sprintf(path, "../assets/mario%d.png", i+1);
 		textures[i].loadFromFile(path);
@@ -13,8 +13,8 @@ Mario::Mario() {
 	vx = 10;
 	vy = 0;
 	state = 0;
-	Direction curDir = LI;
-	Direction prevDir = LI;
+	Direction curDir = LI;	//ýdle but left facing
+	Direction prevDir = LI;	//RI would be idle but right facing
 }
 
 void Mario::move(MoveDirection dir) {
@@ -22,19 +22,19 @@ void Mario::move(MoveDirection dir) {
 	prevDir = curDir;
 
 	switch (state) {
-	case 0:
-		if (dir == Left) {
+	case 0:	//mario is idle but is going to start moving
+		if (dir == Left) {	//movement to the left
 			state = 1;
 			curDir = L;
 			sprite.move(Vector2f(float(-vx), 0));
 		}
-		else if (dir == Rigth) {
+		else if (dir == Rigth) {	//movement to the right
 			state = 1;
 			curDir = R;
 			sprite.move(Vector2f(float(vx), 0));
 		}
 		break;
-	case 1:
+	case 1:	//first state of mario animation
 		if (dir == Left) {
 			state = 2;
 			curDir = L;
@@ -45,7 +45,7 @@ void Mario::move(MoveDirection dir) {
 			curDir = R;
 			sprite.move(Vector2f(float(vx), 0));
 		}
-		else if (dir == Idle) {
+		else if (dir == Idle) {	//movement is cancelled
 			state = 0;
 			if (prevDir == L || prevDir == LI)
 				curDir = LI;
@@ -93,10 +93,10 @@ void Mario::move(MoveDirection dir) {
 		break;
 	}
 
-	if (curDir != prevDir) {
+	if (curDir != prevDir) { //checks for the direction to correct the facing of the animation
 		if (curDir == R && prevDir  != RI) {
 			sprite.setScale(-1.f, 1.f);
-			sprite.move(Vector2f(float(textures[state].getSize().x), 0));
+			sprite.move(Vector2f(float(textures[state].getSize().x), 0)); //moving the sprite  back because when you turn it . it moves
 		}
 		else if (curDir == L && prevDir != LI) {
 			sprite.setScale(1.f, 1.f);
@@ -109,11 +109,11 @@ void Mario::move(MoveDirection dir) {
 
 void Mario::jump(bool down) {
 
-	if (down) {
+	if (down) { //falling down edge
 		sprite.move(Vector2f(0, 10));
 		sprite.setTexture(textures[state]);
 	}
-	else {
+	else { //jumping
 		vy += 0.000002;
 		sprite.move(Vector2f(0, vy));
 		sprite.setTexture(textures[state]);

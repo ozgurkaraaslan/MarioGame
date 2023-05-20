@@ -4,7 +4,7 @@ Turtle::Turtle() {
 
 	char path[64];
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)	//storing textures on a array
 	{
 		sprintf(path, "../assets/turtle%d.png", i + 1);
 		textures[i].loadFromFile(path);
@@ -23,9 +23,9 @@ void Turtle::move(MoveDirection dir) {
 
 	prevDir = curDir;
 
-	switch (state)
+	switch (state)	
 	{
-	case 0:
+	case 0:		//depending on spawn position turtle will continue on same direction also there is no idle animation
 		if (dir == Rigth) {
 			sprite.move(float(vx), 0);
 			state=1;
@@ -88,7 +88,16 @@ void Turtle::jump(bool down) { // turtle falls down edge
 	}
 }
 
+void Turtle::pipeTeleport() {
+	if (sprite.getPosition().x <= 138.f && sprite.getPosition().y>=700) { //checks if turtles are inside the floor pipes to teleport them 
+		sprite.setPosition(Vector2f(862.f, 105.f));
 
+	}
+	else if (sprite.getPosition().x >= 862.f && sprite.getPosition().y >= 700) {
+		sprite.setPosition(Vector2f(138.f, 105.f));
+
+	}
+}
 
 void Turtle::fall() {
 

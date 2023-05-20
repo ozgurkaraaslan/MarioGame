@@ -80,7 +80,7 @@ void Game::update(void){
          
          window->clear();
          
-         if (turtleNumber < 5) {
+         if (turtleNumber < 5) {    //turtle spawn
              if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
                  if (turtleNumber % 2 == 0) {
                      turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
@@ -93,21 +93,24 @@ void Game::update(void){
              }
          }
          
-         for (int i = 0; i < turtleNumber; i++) {
-             if (i % 2 == 0) {
+         for (int i = 0; i < turtleNumber; i++) { //all methods concerning movement of  turtles is here 
+             if (i % 2 == 0) {  //moves the turtles
                  turtles[i].move(Turtle::MoveDirection::Rigth);
              }
              else {
                  turtles[i].move(Turtle::MoveDirection::Left);
              }
+             turtles[i].pipeTeleport();
+             turtles[i].edgeHit();  //checks if turtles hit boundary of window
+
              
-             turtles[i].edgeHit();
-             if (!(onFLoor(turtles[i]))) {
+
+             if (!(onFLoor(turtles[i]))) {  //checks if turtles are on the floor
                  turtles[i].jump(true);
              }
          }
 
-         for(int i = 0; i < turtleNumber; i++) {
+         for(int i = 0; i < turtleNumber; i++) {    //draws the turtles
              turtles[i].draw(*window);
          }
 
@@ -130,7 +133,7 @@ void Game::update(void){
 }
 void Game::drawBackground() {
 
-    floor = new Floor;
+    floor = new Floor;  //setting the positions of background objects
     floor->setPosition(Vector2f(0, (window->getSize().y) * 0.87));
     
     pipeSs = new PipeS[2];
@@ -146,7 +149,7 @@ void Game::drawBackground() {
     float row = 0;
     float column = 0;
 
-    bricks = new Brick[NUM_BRICKS];
+    bricks = new Brick[NUM_BRICKS]; //setting the positions of all the bricks
     int k = 0, m = 0;
 
     for (int j = 0; j < (sizeof(brick_rows) / sizeof(float)); j++) {
