@@ -35,7 +35,7 @@ void Game::update(void){
     {
          // check all the window's events that were triggered since the last iteration of the loop
          sf::Event event;
-
+         
          while (window->pollEvent(event))
          {
              // "close requested" event: we close the window
@@ -45,9 +45,10 @@ void Game::update(void){
 
                  if (rebornFlag) {
                      if (event.key.code == sf::Keyboard::Up && jumpFlag == false) {
-
+                        
                          mario.vy = -20.f;
                          jumpFlag = true;
+                         
                      }
                      else if (event.key.code == sf::Keyboard::Right) {
 
@@ -87,24 +88,33 @@ void Game::update(void){
          }
          else if (rebornFlag == true){
 
-             if (not jumpFlag) {
-                 if (onFLoor(mario)) {
+             if (not jumpFlag) { //idle position
+                 if (onFLoor(mario)) { //mario is on the floor
                      mario.vy = 0;
                  }
-                 else {
+                 else { //mario is not on the floor so make mario fall of the edge
                      mario.jump(true);
                  }
 
              }
-             else {
+             else { //jump
                  mario.jump(false);
-
-                 if (onFLoor(mario)) {
+                 if (underFloor(mario)) {   //checks if mario is hitting under floors to push him back
                      mario.vy = 0;
                      jumpFlag = false;
-                 }
-             }
+                     mario.jump(true);
 
+
+                 }
+                 if (onFLoor(mario)) { //checks if  mario reached  a floor to cancel movement
+                     mario.vy = 0;
+                     jumpFlag = false;
+                     
+                     mario.move(Mario::MoveDirection::Idle);
+                 }
+                
+             }
+            
              mario.edgeHit(); //checks if mario is at the edge
          }
          
@@ -154,7 +164,7 @@ void Game::update(void){
          pipes[1].draw(window);
 
          mario.draw(*window);
-         
+        
          window->display();
 
          sf::sleep(sf::milliseconds(1000/speed));
@@ -218,12 +228,22 @@ bool Game::onFLoor(Object &obj){
     for (int i = 0; i < 2; i++) {
         if (obj.sprite.getGlobalBounds().intersects(pipeSs[i].sprite.getGlobalBounds()))
             return true;
-        /*if (obj.sprite.getGlobalBounds().intersects(pipes[i].sprite.getGlobalBounds()))
-            return true;*/
+        
     }
 
     return false;
     
+}
+bool Game::underFloor(Mario& mario) {
+
+    mario.boundingBox({ float(mario.sprite.getGlobalBounds().left) , float(mario.sprite.getGlobalBounds().top + mario.sprite.getGlobalBounds().height * 0.05) ,float(mario.sprite.getGlobalBounds().width) , float(mario.sprite.getGlobalBounds().height * 0.05) });
+    for (int i = 0; i < NUM_BRICKS; i++) {
+        if (mario.m_hitbox.intersects(bricks[i].sprite.getGlobalBounds()))
+            return true;
+    }
+   
+    return false;
+
 }
 
 bool Game::checkCollusion(int& side) {

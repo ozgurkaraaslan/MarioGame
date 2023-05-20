@@ -22,7 +22,10 @@ Turtle::Turtle() {
 void Turtle::move(MoveDirection dir) {
 
 	prevDir = curDir;
-
+	if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {
+		vx += 0.2;
+		elapsedTime = clock.getElapsedTime().asSeconds();
+	}
 	switch (state)	
 	{
 	case 0:		//depending on spawn position turtle will continue on same direction also there is no idle animation
@@ -103,3 +106,5 @@ void Turtle::fall() {
 
 
 }
+
+

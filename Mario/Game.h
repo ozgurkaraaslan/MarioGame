@@ -30,4 +30,5 @@ public:
 	void drawBackground();
 	bool onFLoor(Object &obj);
 	bool checkCollusion(int& side);
+	bool underFloor(Mario& mario);
 };

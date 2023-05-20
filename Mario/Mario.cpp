@@ -135,9 +135,10 @@ void Mario::jump(bool down) {
 			vx = -3.2f;
 		else
 			vx = 0.f;
-
+		state = 5;
 		sprite.move(Vector2f(vx, vy));
 		sprite.setTexture(textures[state]);
+		
 	}
 }
 

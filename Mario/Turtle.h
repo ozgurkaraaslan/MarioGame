@@ -3,11 +3,12 @@
 #include "Object.h"
 
 class Turtle : public Object {
-
+	
 	float vx, vy;
-	Int32 time;
 	
 public:
+	Clock clock;
+	float elapsedTime = clock.getElapsedTime().asSeconds();
 	enum MoveDirection {
 		Left,
 		Rigth
