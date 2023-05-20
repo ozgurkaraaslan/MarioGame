@@ -43,15 +43,10 @@ void Game::update(void){
                  window->close();
              else if (event.type == sf::Event::KeyPressed) {
 
-                 if (event.key.code == sf::Keyboard::Up) {
-                     mario.vy = -0.03;
-                     if (onFLoor(mario)) {
-                         while (mario.vy <= 0) {
-                             mario.jump(false);
-                             mario.draw(*window);
-                         }
-                         mario.vy = 0;
-                     }
+                 if (event.key.code == sf::Keyboard::Up && jumpFlag == false) {
+                     mario.vy = -33.f;
+                     jumpFlag = true;
+                     
                      
                  }
                  else if (event.key.code == sf::Keyboard::Right) {
@@ -68,17 +63,34 @@ void Game::update(void){
                  mario.move(Mario::MoveDirection::Idle);
              }
          }
-         
-         if (not onFLoor(mario) && mario.vy >=-0.05) {
-             mario.jump(true);
+
+         if (jumpFlag == false) {
+             if (onFLoor(mario)) {
+                 mario.vy = 0;
+             }
+             else{
+                 mario.jump(true);
+             }
+
+             
          }
+         
+
+         if (jumpFlag) {
+             mario.jump(false);
+
+             if (onFLoor(mario)) {
+                 mario.vy = 0;
+                 jumpFlag = false;
+             }
+         }
+
          mario.edgeHit(); //checks if mario is at the edge
          /*
          if (mario.sprite.getPosition().y < WINDOW_HEIGHT - 100) {
              mario.fall();
          }*/
          
-         window->clear();
          
          if (turtleNumber < 5) {    //turtle spawn
              if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
@@ -109,6 +121,8 @@ void Game::update(void){
                  turtles[i].jump(true);
              }
          }
+
+         window->clear();
 
          for(int i = 0; i < turtleNumber; i++) {    //draws the turtles
              turtles[i].draw(*window);

@@ -110,11 +110,17 @@ void Mario::move(MoveDirection dir) {
 void Mario::jump(bool down) {
 
 	if (down) { //falling down edge
-		sprite.move(Vector2f(0, 10));
+		if (vy < 15) {
+			vy += 1.8;
+		}
+		
+		sprite.move(Vector2f(0, vy));
 		sprite.setTexture(textures[state]);
 	}
 	else { //jumping
-		vy += 0.000002;
+		if (vy < 15) {
+			vy += 1.8;
+		}
 		sprite.move(Vector2f(0, vy));
 		sprite.setTexture(textures[state]);
 	}

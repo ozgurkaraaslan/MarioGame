@@ -21,6 +21,7 @@ class Game {
 	float elapsedTime;
 	Clock clock;
 	int turtleNumber = 1;
+	bool jumpFlag = false;
 public:
 	Game(int);
 	void update(void);
