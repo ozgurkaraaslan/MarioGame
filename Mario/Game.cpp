@@ -101,7 +101,6 @@ void Game::update(void){
                  mario.jump(false);
                  if (underFloor(mario)) {   //checks if mario is hitting under floors to push him back
                      mario.vy = 0;
-                     jumpFlag = false;
                      mario.jump(true);
 
 
