@@ -99,10 +99,10 @@ void Game::update(void){
              }
              else { //jump
                  mario.jump(false);
-                 if (underFloor(mario)) {   //checks if mario is hitting under floors to push him back
-                     mario.vy = 0;
-                     jumpFlag = false;
-                     mario.jump(true);
+                 if (underFloor(mario)) {   //checks if mario is hitting his head under bricks to push him back
+                     mario.vy = 0;          //set vertical speed zero to cancel jump
+                     jumpFlag = false;      //stop the jump
+                     mario.jump(true);      //make mario fall down
 
 
                  }
@@ -235,14 +235,14 @@ bool Game::onFLoor(Object &obj){
     
 }
 bool Game::underFloor(Mario& mario) {
-
+    //creating a bounding box at mario's head to check if mario hit his on the bricks
     mario.boundingBox({ float(mario.sprite.getGlobalBounds().left) , float(mario.sprite.getGlobalBounds().top + mario.sprite.getGlobalBounds().height * 0.05) ,float(mario.sprite.getGlobalBounds().width) , float(mario.sprite.getGlobalBounds().height * 0.05) });
     for (int i = 0; i < NUM_BRICKS; i++) {
         if (mario.m_hitbox.intersects(bricks[i].sprite.getGlobalBounds()))
-            return true;
+            return true;    //mario hit his head
     }
    
-    return false;
+    return false;   //mario didnt hit his head
 
 }
 

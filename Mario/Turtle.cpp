@@ -22,7 +22,7 @@ Turtle::Turtle() {
 void Turtle::move(MoveDirection dir) {
 
 	prevDir = curDir;
-	if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {
+	if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {	//checks time in order to increase speed of turtles
 		vx += 0.2;
 		elapsedTime = clock.getElapsedTime().asSeconds();
 	}

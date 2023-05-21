@@ -27,8 +27,8 @@ class Game {
 public:
 	Game(int);
 	void update(void);
-	void drawBackground();
-	bool onFLoor(Object &obj);
-	bool checkCollusion(int& side);
-	bool underFloor(Mario& mario);
+	void drawBackground();			//draws backgrounds
+	bool onFLoor(Object &obj);		//checks if mario is on top of floors/bricks/pipe
+	bool checkCollusion(int& side);	//checks if mario hit a turtle
+	bool underFloor(Mario& mario);	//checks if mario hit his head under bricks
 };
