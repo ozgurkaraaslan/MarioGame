@@ -99,10 +99,9 @@ void Game::update(void){
              }
              else { //jump
                  mario.jump(false);
-                 if (underFloor(mario)) {   //checks if mario is hitting his head under bricks to push him back
-                     mario.vy = 0;          //set vertical speed zero to cancel jump
-                     jumpFlag = false;      //stop the jump
-                     mario.jump(true);      //make mario fall down
+                 if (underFloor(mario)) {   //checks if mario is hitting under floors to push him back
+                     mario.vy = 0;
+                     mario.jump(true);
 
 
                  }
@@ -120,7 +119,7 @@ void Game::update(void){
          
          
          if (turtleNumber < MAX_TURTLE_NUMBER) {    //turtle spawn
-             if (clock.getElapsedTime().asSeconds() - elapsedTime > 10) {
+             if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {
                  if (turtleNumber % 2 == 0) {
                      turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
                  }

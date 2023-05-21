@@ -10,7 +10,7 @@ Turtle::Turtle() {
 		textures[i].loadFromFile(path);
 	}
 
-	vx = 2; //set initial speed in spawn
+	vx = 1.5; //set initial speed in spawn
 	vy = 0;
 	state = 0;
 	sprite.setTexture(textures[state]);
@@ -22,7 +22,7 @@ Turtle::Turtle() {
 void Turtle::move(MoveDirection dir) {
 
 	prevDir = curDir;
-	if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {	//checks time in order to increase speed of turtles
+	if (clock.getElapsedTime().asSeconds() - elapsedTime > 20) {
 		vx += 0.2;
 		elapsedTime = clock.getElapsedTime().asSeconds();
 	}
