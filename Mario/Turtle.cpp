@@ -15,8 +15,8 @@ Turtle::Turtle() {
 	state = 0;
 	sprite.setTexture(textures[state]);
 
-	Direction curDir = R;
-	Direction prevDir = R;
+	curDir = R;
+	prevDir = R;
 
 }
 void Turtle::move(MoveDirection dir) {

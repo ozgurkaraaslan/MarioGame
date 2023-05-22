@@ -18,6 +18,5 @@ public:
 		Idle
 	};
 	
-	Direction curDir;
 	void move(MoveDirection);
 };

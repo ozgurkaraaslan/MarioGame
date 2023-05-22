@@ -11,7 +11,13 @@ protected:
 	bool dead;
 	int state;
 	int heading;
-	
+	enum Direction {
+		L,
+		R,
+		LI,
+		RI
+	};
+	Direction curDir, prevDir;
 public:
 	FloatRect m_hitbox;
 	Sprite sprite;
@@ -19,17 +25,12 @@ public:
 	void setPosition(Vector2f pos);
 	Vector2f getPosition();
 	void draw(RenderWindow &window);
-	enum Direction {
-		L,
-		R,
-		LI,
-		RI
-	};
+	
 	void boundingBox(const FloatRect& hitbox) {
 		m_hitbox = hitbox;
 	}
 	void edgeHit();
-	Direction prevDir;
+	
 	/*
 	void move();
 	void fall();

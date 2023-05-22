@@ -42,9 +42,9 @@ void Game::update(void){
              if (event.type == sf::Event::Closed)
                  window->close();
              else if (event.type == sf::Event::KeyPressed) {
-
+                 
                  if (rebornFlag) {
-                     if (event.key.code == sf::Keyboard::Up && jumpFlag == false) {
+                     if (event.key.code == sf::Keyboard::Up && jumpFlag == false && onFLoor(mario)) {
                         
                          mario.vy = -20.f;
                          jumpFlag = true;
@@ -65,7 +65,7 @@ void Game::update(void){
                  }
                  mario.edgeHit(); //checks if mario is at the edge
              }
-             else if (event.type == sf::Event::KeyReleased) {
+             else if (event.type == sf::Event::KeyReleased && jumpFlag == false) {
                  mario.move(Mario::MoveDirection::Idle);
              }
          }
@@ -97,12 +97,11 @@ void Game::update(void){
                  }
 
              }
-             else { //jump
+             else{ //jump
                  mario.jump(false);
                  if (underFloor(mario)) {   //checks if mario is hitting under floors to push him back
                      mario.vy = 0;
                      mario.jump(true);
-
 
                  }
                  if (onFLoor(mario)) { //checks if  mario reached  a floor to cancel movement

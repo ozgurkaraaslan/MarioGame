@@ -13,8 +13,8 @@ Mario::Mario() {
 	vx = 0;
 	vy = 0;
 	state = 0;
-	Direction curDir = LI;	//ýdle but left facing
-	Direction prevDir = LI;	//RI would be idle but right facing
+	curDir = LI;	//ýdle but left facing
+	prevDir = LI;	//RI would be idle but right facing
 }
 
 void Mario::move(MoveDirection dir) {
@@ -129,9 +129,9 @@ void Mario::jump(bool down) {
 			vy += 0.7;
 		}
 
-		if (prevDir == R)
+		if (prevDir == R && curDir == R)
 			vx = 3.2f;
-		else if (prevDir == L)
+		else if (prevDir == L && curDir == L)
 			vx = -3.2f;
 		else
 			vx = 0.f;
