@@ -1,3 +1,4 @@
+#pragma once
 #include "Common.h"
 #include "backgroundObjects/Brick.h"
 #include "backgroundObjects/Pipe.h"
@@ -24,6 +25,8 @@ class Game {
 	bool jumpFlag = false;
 	bool checkCollusionFlag = false;
 	bool rebornFlag = true;
+	bool turtleDeadFlag = false;
+	int deadTurtleIndice = -1;
 public:
 	Game(int);
 	void update(void);

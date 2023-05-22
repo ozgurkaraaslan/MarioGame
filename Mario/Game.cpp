@@ -70,10 +70,10 @@ void Game::update(void){
              }
          }
 
+
          int side_ = 1;
          if (checkCollusion(side_)) {
-
-             rebornFlag = false;
+             mario.sprite.move(0, 40);
              checkCollusionFlag = true;
          }
 
@@ -116,8 +116,28 @@ void Game::update(void){
              mario.edgeHit(); //checks if mario is at the edge
          }
          
-         
-         if (turtleNumber < MAX_TURTLE_NUMBER) {    //turtle spawn
+         side_ = 0;
+         if (checkCollusion(side_) && not checkCollusionFlag) {
+             turtles[deadTurtleIndice].sprite.move(0.f, 50.f);
+             turtleDeadFlag = true;
+         }
+         if (turtleDeadFlag) {
+             turtles[deadTurtleIndice].fall();
+
+             if (turtles[deadTurtleIndice].sprite.getPosition().y > WINDOW_HEIGHT + 200) {
+                 turtleDeadFlag = false;
+                 /*
+                 for (int i = deadTurtleIndice; i < turtleNumber - 1; i++)
+                 {
+                     turtles[i] = turtles[i + 1];
+                 }
+                 turtleNumber -= 1;*/
+
+             }
+         }
+
+
+         if (turtleNumber < maxTurtleNumber) {    //turtle spawn
              if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {
                  if (turtleNumber % 2 == 0) {
                      turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
@@ -131,18 +151,22 @@ void Game::update(void){
          }
          
          for (int i = 0; i < turtleNumber; i++) { //all methods concerning movement of  turtles is here 
-             if (i % 2 == 0) {  //moves the turtles
-                 turtles[i].move(Turtle::MoveDirection::Rigth);
-             }
-             else {
-                 turtles[i].move(Turtle::MoveDirection::Left);
-             }
-             turtles[i].pipeTeleport();
-             turtles[i].edgeHit();  //checks if turtles hit boundary of window
+             if (i != deadTurtleIndice) {
 
-             if (!(onFLoor(turtles[i]))) {  //checks if turtles are on the floor
-                 turtles[i].jump(true);
+                 if (i % 2 == 0) {  //moves the turtles
+                     turtles[i].move(Turtle::MoveDirection::Rigth);
+                 }
+                 else {
+                     turtles[i].move(Turtle::MoveDirection::Left);
+                 }
+                 turtles[i].pipeTeleport();
+                 turtles[i].edgeHit();  //checks if turtles hit boundary of window
+
+                 if (!(onFLoor(turtles[i]))) {  //checks if turtles are on the floor
+                     turtles[i].jump(true);
+                 }
              }
+             
          }
 
          window->clear();
@@ -207,14 +231,14 @@ void Game::drawBackground() {
 
     mario.setPosition(Vector2f(467.f, 220.f));  
 
-    turtles = new Turtle[MAX_TURTLE_NUMBER];
+    turtles = new Turtle[maxTurtleNumber];
     turtles[0].setPosition(Vector2f(138.f, 105.f));
 
 }
 
 bool Game::onFLoor(Object &obj){
 
-    obj.boundingBox({ float(obj.sprite.getGlobalBounds().left) , float(obj.sprite.getGlobalBounds().top + obj.sprite.getGlobalBounds().height * 0.95 ) ,float(obj.sprite.getGlobalBounds().width) , float(obj.sprite.getGlobalBounds().height * 0.05)  });
+    obj.boundingBox({ float(obj.sprite.getGlobalBounds().left), float(obj.sprite.getGlobalBounds().top + obj.sprite.getGlobalBounds().height * 0.95 ) ,float(obj.sprite.getGlobalBounds().width) , float(obj.sprite.getGlobalBounds().height * 0.05)  });
 
     for(int i = 0; i < NUM_BRICKS; i++){
         if (obj.m_hitbox.intersects(bricks[i].sprite.getGlobalBounds()))
@@ -248,12 +272,20 @@ bool Game::checkCollusion(int& side) {
 
     if (side == 0) {    // top
 
+        for (int i = 0; i < turtleNumber; i++) {
+
+            turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.1) });
+            if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
+                deadTurtleIndice = i;
+                return true;
+            }
+        }
     }
     else if (side == 1) {  // left or right
 
         for (int i = 0; i < turtleNumber; i++) {
             
-            turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top + turtles[i].sprite.getGlobalBounds().height * 0.1) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.9) });
+            turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top + turtles[i].sprite.getGlobalBounds().height * 0.2) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.8) });
             if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
                 return true;
             }

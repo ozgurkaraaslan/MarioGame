@@ -104,7 +104,9 @@ void Turtle::pipeTeleport() {
 
 void Turtle::fall() {
 
-
+	state = 4;
+	sprite.move(Vector2f(0, 11));
+	sprite.setTexture(textures[state]);
 }
 
 
