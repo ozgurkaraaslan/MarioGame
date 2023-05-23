@@ -11,8 +11,8 @@ using namespace sf;
 #define WINDOW_HEIGHT	1000
 #define SPEED			50
 #define NUM_BRICKS      76
-#define TURTLE_SPAWN_FREQUENCY 12
+#define TURTLE_SPAWN_FREQUENCY 6
 
 const int maxTurtleNumber = 5;
 const int brick_nums[4] = { 28, 16, 8, 24 };
-const float brick_rows[4] = {250, 450, 490, 660};
+const float brick_rows[4] = {250, 450, 483, 660};

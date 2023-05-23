@@ -166,8 +166,7 @@ void Game::update(void){
                  if (!(onFLoor(turtles[i]))) {  //checks if turtles are on the floor
                      turtles[i].jump(true);
                  }
-             }
-             
+             } 
          }
 
          window->clear();  // clears window just before new drawings

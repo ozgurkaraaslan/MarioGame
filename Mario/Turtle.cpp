@@ -22,8 +22,8 @@ Turtle::Turtle() {
 void Turtle::move(MoveDirection dir) {
 
 	prevDir = curDir;
-	if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
-		vx += 0.1;
+	if (clock.getElapsedTime().asSeconds() - elapsedTime > 6) {
+		vx += 0.2;
 		elapsedTime = clock.getElapsedTime().asSeconds();
 	}
 	switch (state)	
