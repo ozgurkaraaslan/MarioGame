@@ -22,8 +22,8 @@ Turtle::Turtle() {
 void Turtle::move(MoveDirection dir) {
 
 	prevDir = curDir;
-	if (clock.getElapsedTime().asSeconds() - elapsedTime > 20) {
-		vx += 0.2;
+	if (clock.getElapsedTime().asSeconds() - elapsedTime > 5) {
+		vx += 0.1;
 		elapsedTime = clock.getElapsedTime().asSeconds();
 	}
 	switch (state)	
@@ -102,10 +102,10 @@ void Turtle::pipeTeleport() {
 	}
 }
 
-void Turtle::fall() {
+void Turtle::fall() {	// turtle fall due to dying
 
 	state = 4;
-	sprite.move(Vector2f(0, 11));
+	sprite.move(Vector2f(0, 10));
 	sprite.setTexture(textures[state]);
 }
 

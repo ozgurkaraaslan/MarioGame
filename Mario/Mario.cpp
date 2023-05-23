@@ -20,7 +20,7 @@ Mario::Mario() {
 void Mario::move(MoveDirection dir) {
 
 	prevDir = curDir;
-	vx = 6.f;
+	vx = 7.f;
 
 	switch (state) {
 	case 0:	//mario is idle but is going to start moving
@@ -116,7 +116,7 @@ void Mario::move(MoveDirection dir) {
 
 void Mario::jump(bool down) {
 
-	if (down) { //falling down edge
+	if (down) {	//falling down edge
 		if (vy < 11) {
 			vy += 0.7;
 		}
@@ -124,7 +124,7 @@ void Mario::jump(bool down) {
 		sprite.move(Vector2f(0, vy));
 		sprite.setTexture(textures[state]);
 	}
-	else { //jumping
+	else {	//jumping
 		if (vy < 11) {
 			vy += 0.7;
 		}
@@ -142,9 +142,9 @@ void Mario::jump(bool down) {
 	}
 }
 
-void Mario::fall() {
+void Mario::fall() {	// Mario fall due to dying
 	
 	state = 6;
-	sprite.move(Vector2f(0, 14));
+	sprite.move(Vector2f(0, 10));
 	sprite.setTexture(textures[state]);
 }

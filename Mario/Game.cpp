@@ -9,7 +9,7 @@ Game::Game(int speed) {
 
     sf::Event event;
     while (window->isOpen() && mainMenu.startGame) {
-        while (window->pollEvent(event) && mainMenu.startGame) {
+        while (window->pollEvent(event) && mainMenu.startGame) {        // start menu 
 
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Enter) {
@@ -26,7 +26,7 @@ Game::Game(int speed) {
 
     }
 
-    elapsedTime = clock.getElapsedTime().asSeconds();
+    elapsedTime = clock.getElapsedTime().asSeconds();   // holds initial time of the game for turtle spawning
 }
 
 void Game::update(void){
@@ -54,12 +54,12 @@ void Game::update(void){
 
                          mario.move(Mario::MoveDirection::Rigth);
                      }
-                     else if (event.key.code == sf::Keyboard::Left) {
+                     else if (event.key.code == sf::Keyboard::Left) { 
 
                          mario.move(Mario::MoveDirection::Left);
                      }
                  }
-                 if (event.key.code == sf::Keyboard::Enter) {
+                 if (event.key.code == sf::Keyboard::Enter) {   // checks reborn of Mario
 
                      rebornFlag = true;
                  }
@@ -72,12 +72,13 @@ void Game::update(void){
 
 
          int side_ = 1;
-         if (checkCollusion(side_)) {
+         if (checkCollusion(side_)) {      // checks if Mario has hit a turtle from lateral side
              mario.sprite.move(0, 40);
              checkCollusionFlag = true;
+             rebornFlag = false;
          }
 
-         if (checkCollusionFlag) {
+         if (checkCollusionFlag) {      // organizes dead Mario operations
              mario.fall();
 
              if (mario.sprite.getPosition().y > WINDOW_HEIGHT - 90) {
@@ -86,25 +87,25 @@ void Game::update(void){
                  mario.move(Mario::MoveDirection::Idle);
              }
          }
-         else if (rebornFlag == true){
+         else if (rebornFlag == true){  // checks if Mario is alive 
 
-             if (not jumpFlag) { //idle position
-                 if (onFLoor(mario)) { //mario is on the floor
+             if (not jumpFlag) {    // no jump directive 
+                 if (onFLoor(mario)) {     // checks if Mario is on the floor
                      mario.vy = 0;
                  }
-                 else { //mario is not on the floor so make mario fall of the edge
+                 else {     //mario is not on the floor so make mario fall of the edge
                      mario.jump(true);
                  }
 
              }
-             else{ //jump
+             else{    //jump
                  mario.jump(false);
-                 if (underFloor(mario)) {   //checks if mario is hitting under floors to push him back
+                 if (underFloor(mario)) {   //checks if Mario is hitting under floors to push him back
                      mario.vy = 0;
                      mario.jump(true);
 
                  }
-                 if (onFLoor(mario)) { //checks if  mario reached  a floor to cancel movement
+                 if (onFLoor(mario)) { //checks if Mario reached  a floor to cancel movement
                      mario.vy = 0;
                      jumpFlag = false;
                      
@@ -113,15 +114,15 @@ void Game::update(void){
                 
              }
             
-             mario.edgeHit(); //checks if mario is at the edge
+              mario.edgeHit(); //checks if Mario is at the edge
          }
          
          side_ = 0;
-         if (checkCollusion(side_) && not checkCollusionFlag) {
+         if (checkCollusion(side_) && not checkCollusionFlag) {     // checks if Mario has hit a turtle from top side
              turtles[deadTurtleIndice].sprite.move(0.f, 50.f);
              turtleDeadFlag = true;
          }
-         if (turtleDeadFlag) {
+         if (turtleDeadFlag) {      // organizes dead turtle operations
              turtles[deadTurtleIndice].fall();
 
              if (turtles[deadTurtleIndice].sprite.getPosition().y > WINDOW_HEIGHT + 200) {
@@ -137,8 +138,8 @@ void Game::update(void){
          }
 
 
-         if (turtleNumber < maxTurtleNumber) {    //turtle spawn
-             if (clock.getElapsedTime().asSeconds() - elapsedTime > 15) {
+         if (turtleNumber < maxTurtleNumber) {    // checks max turtle spawn
+             if (clock.getElapsedTime().asSeconds() - elapsedTime > TURTLE_SPAWN_FREQUENCY) {  // manages turtle spawn timing
                  if (turtleNumber % 2 == 0) {
                      turtles[turtleNumber].setPosition(Vector2f(138.f, 105.f));
                  }
@@ -146,11 +147,11 @@ void Game::update(void){
                      turtles[turtleNumber].setPosition(Vector2f(862.f, 105.f));
                  }
                  turtleNumber += 1;
-                 elapsedTime = clock.getElapsedTime().asSeconds();
+                 elapsedTime = clock.getElapsedTime().asSeconds();     // holds time to manage spawning 
              }
          }
          
-         for (int i = 0; i < turtleNumber; i++) { //all methods concerning movement of  turtles is here 
+         for (int i = 0; i < turtleNumber; i++) { // movement methods of turtles 
              if (i != deadTurtleIndice) {
 
                  if (i % 2 == 0) {  //moves the turtles
@@ -169,9 +170,9 @@ void Game::update(void){
              
          }
 
-         window->clear();
+         window->clear();  // clears window just before new drawings
 
-         for (int i = 0; i < NUM_BRICKS; i++) {
+         for (int i = 0; i < NUM_BRICKS; i++) {  // draws bricks
              bricks[i].draw(window);
          }
          floor->draw(window);
@@ -180,16 +181,16 @@ void Game::update(void){
              turtles[i].draw(*window);
          }
          
-         pipeSs[0].draw(window);
+         pipeSs[0].draw(window);    // draws pipeS
          pipeSs[1].draw(window);
-         pipes[0].draw(window);
+         pipes[0].draw(window);     // draws pipe
          pipes[1].draw(window);
 
-         mario.draw(*window);
+         mario.draw(*window);       // draws Mario
         
-         window->display();
+         window->display();         // shows all the drawings
 
-         sf::sleep(sf::milliseconds(1000/speed));
+         sf::sleep(sf::milliseconds(1000/speed));   // delay before next the loop
      }
 }
 void Game::drawBackground() {
@@ -270,7 +271,7 @@ bool Game::underFloor(Mario& mario) {
 
 bool Game::checkCollusion(int& side) {
 
-    if (side == 0) {    // top
+    if (side == 0) {    // checks if Mario has hit a turtle from top side
 
         for (int i = 0; i < turtleNumber; i++) {
 
@@ -281,7 +282,7 @@ bool Game::checkCollusion(int& side) {
             }
         }
     }
-    else if (side == 1) {  // left or right
+    else if (side == 1) {  // checks if Mario has hit a turtle from lateral side
 
         for (int i = 0; i < turtleNumber; i++) {
             
