@@ -7,6 +7,8 @@
 #include "Mario.h"
 #include "Turtle.h"
 #include "MainMenu.h"
+#include "Scoreboard.h"
+#include "Heads.h"
 
 class Game {
 	RenderWindow* window;
@@ -17,8 +19,10 @@ class Game {
 	PipeS* pipeSs;
 	Floor* floor;
 	Mario mario;
+	Scoreboard scoreboard;
 	Turtle* turtles;
 	MainMenu mainMenu;
+	Heads *heads;
 	float elapsedTime;
 	Clock clock;
 	int turtleNumber = 1;
@@ -34,4 +38,5 @@ public:
 	bool onFLoor(Object &obj);		//checks if mario is on top of floors/bricks/pipe
 	bool checkCollusion(int& side);	//checks if mario hit a turtle
 	bool underFloor(Mario& mario);	//checks if mario hit his head under bricks
+	void gameOver(void);
 };

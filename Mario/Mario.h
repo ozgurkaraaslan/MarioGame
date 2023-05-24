@@ -4,8 +4,8 @@
 
 class Mario : public Object  {
 	
-	
 public:
+	int remainingLives = 3;
 	float vx;
 	float vy=0;
 	Mario();

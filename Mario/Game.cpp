@@ -48,7 +48,6 @@ void Game::update(void){
                         
                          mario.vy = -20.f;
                          jumpFlag = true;
-                         
                      }
                      else if (event.key.code == sf::Keyboard::Right) {
 
@@ -73,7 +72,12 @@ void Game::update(void){
 
          int side_ = 1;
          if (checkCollusion(side_)) {      // checks if Mario has hit a turtle from lateral side
-             mario.sprite.move(0, 40);
+             
+             if (mario.remainingLives == 0) {
+                 gameOver();
+             }
+
+             mario.sprite.move(0, 88);
              checkCollusionFlag = true;
              rebornFlag = false;
          }
@@ -119,6 +123,9 @@ void Game::update(void){
          
          side_ = 0;
          if (checkCollusion(side_) && not checkCollusionFlag) {     // checks if Mario has hit a turtle from top side
+             if (scoreboard.score >= 500) {
+                 gameOver();
+             }
              turtles[deadTurtleIndice].sprite.move(0.f, 50.f);
              turtleDeadFlag = true;
          }
@@ -127,6 +134,7 @@ void Game::update(void){
 
              if (turtles[deadTurtleIndice].sprite.getPosition().y > WINDOW_HEIGHT + 200) {
                  turtleDeadFlag = false;
+                 
                  /*
                  for (int i = deadTurtleIndice; i < turtleNumber - 1; i++)
                  {
@@ -180,13 +188,17 @@ void Game::update(void){
              turtles[i].draw(*window);
          }
          
+         for (int i = 0; i < mario.remainingLives; i++) {    //draws the turtles
+             heads[i].draw(*window);
+         }
+
          pipeSs[0].draw(window);    // draws pipeS
          pipeSs[1].draw(window);
          pipes[0].draw(window);     // draws pipe
          pipes[1].draw(window);
 
          mario.draw(*window);       // draws Mario
-        
+         scoreboard.draw(*window);
          window->display();         // shows all the drawings
 
          sf::sleep(sf::milliseconds(1000/speed));   // delay before next the loop
@@ -234,6 +246,11 @@ void Game::drawBackground() {
     turtles = new Turtle[maxTurtleNumber];
     turtles[0].setPosition(Vector2f(138.f, 105.f));
 
+    heads = new Heads[3];
+    heads[0].setPosition(Vector2f(120.f, 60.f));
+    heads[1].setPosition(Vector2f(160.f, 60.f));
+    heads[2].setPosition(Vector2f(200.f, 60.f));
+
 }
 
 bool Game::onFLoor(Object &obj){
@@ -277,6 +294,7 @@ bool Game::checkCollusion(int& side) {
             turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.1) });
             if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
                 deadTurtleIndice = i;
+                scoreboard.scoreSetter();
                 return true;
             }
         }
@@ -287,10 +305,38 @@ bool Game::checkCollusion(int& side) {
             
             turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top + turtles[i].sprite.getGlobalBounds().height * 0.2) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.8) });
             if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
+                mario.remainingLives -= 1;
                 return true;
             }
         }
     }
 
     return false;
+}
+void Game::gameOver(void) {
+
+    window->clear();
+    Text textOver;
+    Font font;
+    if (!font.loadFromFile("../assets/font.ttf"))
+    {
+        cout << "Couldn't load font";
+    }
+    //set font for text
+    textOver.setFont(font);
+    //textOver name
+    textOver.setString("GAME OVER");
+    //set size
+    textOver.setCharacterSize(75);
+    //set color
+    textOver.setFillColor(Color::Red);
+    //set pos.
+    textOver.setPosition(WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.4);
+    window->draw(textOver);
+    window->display();
+    sf::sleep(sf::milliseconds(200000 / speed));
+    window->close();
+    
+
+
 }
