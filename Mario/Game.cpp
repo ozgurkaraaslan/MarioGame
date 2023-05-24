@@ -74,7 +74,7 @@ void Game::update(void){
          if (checkCollusion(side_)) {      // checks if Mario has hit a turtle from lateral side
              
              if (mario.remainingLives == 0) {
-                 gameOver();
+                 gameOver(false);
              }
 
              mario.sprite.move(0, 88);
@@ -124,7 +124,7 @@ void Game::update(void){
          side_ = 0;
          if (checkCollusion(side_) && not checkCollusionFlag) {     // checks if Mario has hit a turtle from top side
              if (scoreboard.score >= 500) {
-                 gameOver();
+                 gameOver(true);
              }
              turtles[deadTurtleIndice].sprite.move(0.f, 50.f);
              turtleDeadFlag = true;
@@ -198,7 +198,9 @@ void Game::update(void){
          pipes[1].draw(window);
 
          mario.draw(*window);       // draws Mario
-         scoreboard.draw(*window);
+
+         scoreboard.draw(*window);  //draws scoreboard
+         
          window->display();         // shows all the drawings
 
          sf::sleep(sf::milliseconds(1000/speed));   // delay before next the loop
@@ -253,10 +255,10 @@ void Game::drawBackground() {
 
 }
 
-bool Game::onFLoor(Object &obj){
-
+bool Game::onFLoor(Object &obj){     //checks if the obj is on top of the floors  
+    
     obj.boundingBox({ float(obj.sprite.getGlobalBounds().left), float(obj.sprite.getGlobalBounds().top + obj.sprite.getGlobalBounds().height * 0.95 ) ,float(obj.sprite.getGlobalBounds().width) , float(obj.sprite.getGlobalBounds().height * 0.05)  });
-
+    //creates a small bounding box at obj feet
     for(int i = 0; i < NUM_BRICKS; i++){
         if (obj.m_hitbox.intersects(bricks[i].sprite.getGlobalBounds()))
             return true;
@@ -290,8 +292,9 @@ bool Game::checkCollusion(int& side) {
     if (side == 0) {    // checks if Mario has hit a turtle from top side
 
         for (int i = 0; i < turtleNumber; i++) {
-
+            //sets a bounding box at the head of turtle
             turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.1) });
+            //checks if the bounding box intersected mario if so kills turtle
             if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
                 deadTurtleIndice = i;
                 scoreboard.scoreSetter();
@@ -313,29 +316,49 @@ bool Game::checkCollusion(int& side) {
 
     return false;
 }
-void Game::gameOver(void) {
-
-    window->clear();
+void Game::gameOver(bool finishType) { // ends the game
     Text textOver;
     Font font;
     if (!font.loadFromFile("../assets/font.ttf"))
     {
         cout << "Couldn't load font";
     }
-    //set font for text
-    textOver.setFont(font);
-    //textOver name
-    textOver.setString("GAME OVER");
-    //set size
-    textOver.setCharacterSize(75);
-    //set color
-    textOver.setFillColor(Color::Red);
-    //set pos.
-    textOver.setPosition(WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.4);
-    window->draw(textOver);
-    window->display();
-    sf::sleep(sf::milliseconds(200000 / speed));
-    window->close();
+    if (finishType) {       //SCORE REACHED 500
+        window->clear();
+        //set font for text
+        textOver.setFont(font);
+        //textOver name
+        textOver.setString("GAME OVER\n\tYOU WON");
+        //set size
+        textOver.setCharacterSize(75);
+        //set color
+        textOver.setFillColor(Color::Red);
+        //set pos.
+        textOver.setPosition(WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.4);
+        window->draw(textOver);
+        window->display();
+        sf::sleep(sf::milliseconds(200000 / speed));
+        window->close();
+    }
+    else {          //MARIO DIES
+        window->clear();
+        //set font for text
+        textOver.setFont(font);
+        //textOver name
+        textOver.setString("GAME OVER\n YOU LOST");
+        //set size
+        textOver.setCharacterSize(75);
+        //set color
+        textOver.setFillColor(Color::Red);
+        //set pos.
+        textOver.setPosition(WINDOW_WIDTH * 0.25, WINDOW_HEIGHT * 0.4);
+        window->draw(textOver);
+        window->display();
+        sf::sleep(sf::milliseconds(200000 / speed));
+        window->close();
+
+
+    }
     
 
 
