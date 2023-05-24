@@ -130,9 +130,9 @@ void Mario::jump(bool down) {
 		}
 
 		if (prevDir == R && curDir == R)
-			vx = 3.2f;
+			vx = 3.5f;
 		else if (prevDir == L && curDir == L)
-			vx = -3.2f;
+			vx = -3.5f;
 		else
 			vx = 0.f;
 		state = 5;

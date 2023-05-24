@@ -13,6 +13,7 @@ public:
 		Left,
 		Rigth
 	};
+	MoveDirection dir;
 	Turtle();
 	void move(MoveDirection);
 	void jump(bool down);

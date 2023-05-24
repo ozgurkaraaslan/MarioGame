@@ -31,7 +31,8 @@ class Game {
 	bool rebornFlag = true;
 	bool turtleDeadFlag = false;
 	int deadTurtleIndice = -1;
-	bool turtleCollusion();
+	void turtleCollusion(int);
+	int collidedTurtleOne, collidedTurtleTwo;
 public:
 	Game(int);
 	void update(void);

@@ -162,20 +162,21 @@ void Game::update(void){
          for (int i = 0; i < turtleNumber; i++) { // movement methods of turtles 
              if (i != deadTurtleIndice) {
 
-                 if (i % 2 == 0) {  //moves the turtles
-                     turtles[i].move(Turtle::MoveDirection::Rigth);
-                 }
-                 else {
-                     turtles[i].move(Turtle::MoveDirection::Left);
-                 }
+                 turtles[i].move(turtles[i].dir);
+                 
                  turtles[i].pipeTeleport();
                  turtles[i].edgeHit();  //checks if turtles hit boundary of window
 
                  if (!(onFLoor(turtles[i]))) {  //checks if turtles are on the floor
                      turtles[i].jump(true);
                  }
+                 else {
+                     turtleCollusion(i);
+                 }
+                 
              } 
          }
+         
 
          window->clear();  // clears window just before new drawings
 
@@ -247,6 +248,11 @@ void Game::drawBackground() {
 
     turtles = new Turtle[maxTurtleNumber];
     turtles[0].setPosition(Vector2f(138.f, 105.f));
+    turtles[0].dir = Turtle::MoveDirection::Rigth;
+    turtles[1].dir = Turtle::MoveDirection::Left;
+    turtles[2].dir = Turtle::MoveDirection::Rigth;
+    turtles[3].dir = Turtle::MoveDirection::Left;
+    turtles[4].dir = Turtle::MoveDirection::Rigth;
 
     heads = new Heads[3];
     heads[0].setPosition(Vector2f(120.f, 60.f));
@@ -286,30 +292,36 @@ bool Game::underFloor(Mario& mario) {
     return false;   //mario didnt hit his head
 
 }
-/*
-bool Game::turtleCollusion() {
 
-    for (int k = 0; k < turtleNumber-1;k++) {
-        turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.1) });
-
-        for (int i = 0; i < turtleNumber; i++) {
+void Game::turtleCollusion(int j) {
+        
+        for (int i = 0; i < turtleNumber-1; i++) {
             
-            if (i != k) {
+            if (i != j) {
+                turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top + turtles[i].sprite.getGlobalBounds().height * 0.8) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.2) });
 
-                //sets a bounding box at the head of turtle
-                //checks if the bounding box intersected mario if so kills turtle
-                if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
-                    deadTurtleIndice = i;
-                    scoreboard.scoreSetter();
-                    return true;
+                if (turtles[i].m_hitbox.intersects(turtles[j].sprite.getGlobalBounds()) && turtles[i].dir != turtles[j].dir) {
+                    
+                        if (turtles[i].dir == Turtle::MoveDirection::Rigth) {
+                               turtles[i].dir = Turtle::MoveDirection::Left;
+                               turtles[i].sprite.move(-60, 0);
+                               turtles[j].dir = Turtle::MoveDirection::Rigth;
+                               turtles[j].sprite.move(60, 0);
+                               return;
+                        }
+                        else if(turtles[i].dir == Turtle::MoveDirection::Left) {
+                            turtles[j].dir = Turtle::MoveDirection::Left;
+                            turtles[j].sprite.move(-60, 0);
+                            turtles[i].dir = Turtle::MoveDirection::Rigth;
+                            turtles[i].sprite.move(60, 0);
+                            return;
+                        }
                 }
             }
         }
-    }
     
-
-    return false;
-}*/
+    return;
+}
 
 bool Game::checkCollusion(int& side) {
 

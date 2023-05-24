@@ -19,8 +19,9 @@ Turtle::Turtle() {
 	prevDir = R;
 
 }
-void Turtle::move(MoveDirection dir) {
+void Turtle::move(MoveDirection direction) {
 
+	dir = direction;
 	prevDir = curDir;
 	if (clock.getElapsedTime().asSeconds() - elapsedTime > 6) {
 		vx += 0.2;
