@@ -286,6 +286,30 @@ bool Game::underFloor(Mario& mario) {
     return false;   //mario didnt hit his head
 
 }
+/*
+bool Game::turtleCollusion() {
+
+    for (int k = 0; k < turtleNumber-1;k++) {
+        turtles[i].boundingBox({ float(turtles[i].sprite.getGlobalBounds().left) , float(turtles[i].sprite.getGlobalBounds().top) ,float(turtles[i].sprite.getGlobalBounds().width) , float(turtles[i].sprite.getGlobalBounds().height * 0.1) });
+
+        for (int i = 0; i < turtleNumber; i++) {
+            
+            if (i != k) {
+
+                //sets a bounding box at the head of turtle
+                //checks if the bounding box intersected mario if so kills turtle
+                if (turtles[i].m_hitbox.intersects(mario.sprite.getGlobalBounds())) {
+                    deadTurtleIndice = i;
+                    scoreboard.scoreSetter();
+                    return true;
+                }
+            }
+        }
+    }
+    
+
+    return false;
+}*/
 
 bool Game::checkCollusion(int& side) {
 

@@ -31,6 +31,7 @@ class Game {
 	bool rebornFlag = true;
 	bool turtleDeadFlag = false;
 	int deadTurtleIndice = -1;
+	bool turtleCollusion();
 public:
 	Game(int);
 	void update(void);
@@ -39,4 +40,5 @@ public:
 	bool checkCollusion(int& side);	//checks if mario hit a turtle
 	bool underFloor(Mario& mario);	//checks if mario hit his head under bricks
 	void gameOver(bool finishType);
+	
 };

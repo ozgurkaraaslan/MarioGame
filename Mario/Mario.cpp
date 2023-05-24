@@ -20,7 +20,7 @@ Mario::Mario() {
 void Mario::move(MoveDirection dir) {
 
 	prevDir = curDir;
-	vx = 7.f;
+	vx = 8.f;
 
 	switch (state) {
 	case 0:	//mario is idle but is going to start moving
