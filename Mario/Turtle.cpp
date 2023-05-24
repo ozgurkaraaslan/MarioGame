@@ -1,6 +1,6 @@
 #include "Turtle.h"
 
-Turtle::Turtle() {
+Turtle::Turtle() {  // Turtle constructor
 
 	char path[64];
 
@@ -19,7 +19,7 @@ Turtle::Turtle() {
 	prevDir = R;
 
 }
-void Turtle::move(MoveDirection direction) {
+void Turtle::move(MoveDirection direction) {  // Turtle move method
 
 	dir = direction;
 	prevDir = curDir;
@@ -68,7 +68,6 @@ void Turtle::move(MoveDirection direction) {
 			curDir = L;
 		}
 		break;
-	
 	}
 
 	if (prevDir != curDir) {
@@ -83,16 +82,16 @@ void Turtle::move(MoveDirection direction) {
 	}
 
 	sprite.setTexture(textures[state]);
-	
 }
-void Turtle::jump(bool down) { // turtle falls down edge
+void Turtle::jump(bool down) {  // turtle falls down edge
 	if (down) {
 		sprite.move(Vector2f(0, 8));
 		sprite.setTexture(textures[state]);
 	}
 }
 
-void Turtle::pipeTeleport() {
+void Turtle::pipeTeleport() {  // method for teleporting between pipes
+
 	if (sprite.getPosition().x <= 138.f && sprite.getPosition().y>=700) { //checks if turtles are inside the floor pipes to teleport them 
 		sprite.setPosition(Vector2f(862.f, 105.f));
 

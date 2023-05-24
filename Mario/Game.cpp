@@ -201,13 +201,20 @@ void Game::update(void){
          mario.draw(*window);       // draws Mario
 
          scoreboard.draw(*window);  //draws scoreboard
-         
+         window->draw(textOver);
          window->display();         // shows all the drawings
 
          sf::sleep(sf::milliseconds(1000/speed));   // delay before next the loop
      }
 }
 void Game::drawBackground() {
+
+    font.loadFromFile("../assets/font.ttf");
+    textOver.setFont(font);
+    textOver.setString("Press Enter to be Reborn");
+    textOver.setCharacterSize(14);
+    textOver.setFillColor(Color::White);
+    textOver.setPosition(WINDOW_WIDTH * 0.38, 15);
 
     floor = new Floor;  //setting the positions of background objects
     floor->setPosition(Vector2f(0, (window->getSize().y) * 0.87));
@@ -293,7 +300,7 @@ bool Game::underFloor(Mario& mario) {
 
 }
 
-void Game::turtleCollusion(int j) {
+void Game::turtleCollusion(int j) {        // collision check for turtles
         
         for (int i = 0; i < turtleNumber-1; i++) {
             
@@ -392,10 +399,5 @@ void Game::gameOver(bool finishType) { // ends the game
         window->display();
         sf::sleep(sf::milliseconds(200000 / speed));
         window->close();
-
-
     }
-    
-
-
 }

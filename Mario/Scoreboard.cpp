@@ -1,7 +1,7 @@
 #include "Common.h"
 #include "Scoreboard.h"
 
-Scoreboard::Scoreboard() {
+Scoreboard::Scoreboard() { // Scoreboard constructor
 
 	if (!font.loadFromFile("../assets/font.ttf"))
 	{
@@ -21,7 +21,7 @@ void Scoreboard::scoreSetter() { // when called within game.cpp it will incremen
 	scoreString.str("");
 	scoreString.clear();
 }
-void Scoreboard::draw(RenderWindow& window) {
+void Scoreboard::draw(RenderWindow& window) {   // Scoreboard drawing method
 
 	window.draw(scoreText);
 }

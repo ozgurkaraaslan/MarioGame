@@ -1,6 +1,6 @@
 #include "Mario.h"
 
-Mario::Mario() {
+Mario::Mario() {	// Mario constructor
 
 	char path[64];
 

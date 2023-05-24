@@ -2,12 +2,11 @@
 #include "Common.h"
 #include "Object.h"
 
-class Mario : public Object  {
+class Mario : public Object  {  // Mario class
 	
 public:
 	int remainingLives = 3;
-	float vx;
-	float vy=0;
+	float vx,vy=0;
 	Mario();
 	void jump(bool down); 
 	void fall();
