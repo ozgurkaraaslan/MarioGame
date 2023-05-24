@@ -328,7 +328,7 @@ void Game::gameOver(bool finishType) { // ends the game
         //set font for text
         textOver.setFont(font);
         //textOver name
-        textOver.setString("GAME OVER\n\tYOU WON");
+        textOver.setString("GAME OVER\n\tYOU WIN");
         //set size
         textOver.setCharacterSize(75);
         //set color
@@ -345,7 +345,7 @@ void Game::gameOver(bool finishType) { // ends the game
         //set font for text
         textOver.setFont(font);
         //textOver name
-        textOver.setString("GAME OVER\n YOU LOST");
+        textOver.setString("GAME OVER\n  YOU LOST");
         //set size
         textOver.setCharacterSize(75);
         //set color
