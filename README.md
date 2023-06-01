@@ -1,6 +1,6 @@
 # MarioGame
 
-This project was made as an Object Oriented Programming course project.
+This project was made as an Object Oriented Programming course project. SFML library and object oriented programming techniques are used for the project.
 
 ## How To Play
 
